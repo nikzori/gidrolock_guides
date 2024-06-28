@@ -1,7 +1,10 @@
 # ZigBee2MQTT: файлы конфигурации
 Файлы расширения для ZigBee2MQTT; для поддержки устройства необходим только один из файлов. 
-Поместите файл в папку `/data.` В файле `configuration.yaml` добавьте следущее:
-
+Поместите файл в папку `/data.` В файле `configuration.yaml` в той же папке добавьте следущее:
+`
+external_converters:
+  - Winner_ZigBee_Basic.js
+`
 
 ## Winner_ZigBee_Basic.js
 Базовая поддержка для Winner'а. Доступные данные:
