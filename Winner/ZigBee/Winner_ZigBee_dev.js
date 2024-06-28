@@ -82,26 +82,47 @@ const definition = {
             [1, 'switch', tuya.valueConverter.raw],
             //[2, 'percent_control', tuya.valueConverter.raw], //don't even know what this is
             [4, 'fault', tuya.valueConverter.raw],
-            [10, 'weather_delay', tuya.valueConverterBasic.lookup({'1': tuya.enum(0), '10': tuya.enum(1)})],
-            [11, 'countdown', tuya.valueConverter.raw],
-            [13, 'smart_weather', tuya.valueConverterBasic.lookup({'1': tuya.enum(0), '10': tuya.enum(1)})],
-            [21, 'minihum_set', tuya.valueConverter.raw],
             [101, 'alarm', tuya.valueConverter.raw],
             [102, 'battery', tuya.valueConverterBasic.lookup({'10': tuya.enum(0), '20': tuya.enum(1), '30': tuya.enum(2), '40': tuya.enum(3), '50': tuya.enum(4), '60': tuya.enum(5), '70': tuya.enum(6), '80': tuya.enum(7), '90': tuya.enum(8), '100': tuya.enum(9), '101': tuya.enum(10)})],
+            [104, 'cleaning', tuya.valueConverter.raw],
 
             //#region WIP
-            /*
-            [103, 'device_cmd', tuya.valueConverter.raw],
-            [104, 'cleaning', tuya.valueConverter.raw],
-            [105, 'journal', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})]
-            //[106, 'channel_2', tuya.valueConverter.raw], //send-only DP, doesn't get sent by the device and causes errors
             
+            //[103, 'device_cmd', tuya.valueConverter.raw], // a Number DP used to issue commands to the device 
+            //[105, 'journal', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})] // Temporarily publishes string 'x; sensor name' where "x" is any of following characters: A - leak detected; B - Winner's battery charge is low; L - low sensor charge; T - sensor signal lost;
+            //[106, 'channel_2', tuya.valueConverter.raw], //send-only boolean DP used for external sensors; doesn't get sent by the device and throws an error in z2mqtt
+            
+            //#region Water Counters
+            /* - Tick Settings: 1 tick per 1 liter | 1 tick per 10 liters; 
+            *
+            * - Number DPs contain both counter ticks to display the water volume and a bit flag for Smart Life App;
+            *   Use counterMask to get the water volume (multiply by ticks):
+            let counterWaterValue1 = (counter1 & counterMask) * counterMultiplier1 //or something like that
+            */
+
+            //[10, 'weather_delay', tuya.valueConverterBasic.lookup({'1': tuya.enum(0), '10': tuya.enum(1)})],    // counter 1 setting
+            //[11, 'countdown', tuya.valueConverter.raw],                                                         // counter 1 Number DP
+            //[13, 'smart_weather', tuya.valueConverterBasic.lookup({'1': tuya.enum(0), '10': tuya.enum(1)})],    // counter 2 setting
+            //[21, 'minihum_set', tuya.valueConverter.raw],                                                       // counter 2 Number DP
+            //#endregion
+
+            //#region Sensors
+            /* Each sensor DP has the following structure:
+            *
+            *   0xAA_BB_CC_DD where:
+            *   [AA]    - command bit flags
+            *   [BB]    - status bit flags
+            *   [CC]    - signal strength
+            *   [DD]    - battery charge
+            */
+
+            /*
             [107, 'sensor_1', tuya.valueConverter.raw],
             [108, 'sensor_name_1', tuya.valueConverter.raw],
             
             [109, 'sensor_2', tuya.valueConverter.raw],
             [110, 'sensor_name_2', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
-            /*
+            
             [111, 'sensor_3', tuya.valueConverter.raw],
             [112, 'sensor_name_3', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
 
@@ -192,7 +213,7 @@ const definition = {
             [169, 'sensor_32', tuya.valueConverter.raw],
             [170, 'sensor_name_32', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
             */
-           //#endregion
+           //#endregion WIP
         ],
     },
     extend: [   
