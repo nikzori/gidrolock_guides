@@ -89,7 +89,7 @@ const definition = {
             //#region WIP
             
             //[103, 'device_cmd', tuya.valueConverter.raw], // a Number DP used to issue commands to the device 
-            //[105, 'journal', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})] // Temporarily publishes string 'x; sensor name' where "x" is any of following characters: A - leak detected; B - Winner's battery charge is low; L - low sensor charge; T - sensor signal lost;
+            //[105, 'journal', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})] // Temporarily publishes string 'sensor name;x' where "x" is any of following characters: A - leak detected; B - Winner's battery charge is low; L - low sensor charge; T - sensor signal lost;
             //[106, 'channel_2', tuya.valueConverter.raw], //send-only boolean DP used for external sensors; doesn't get sent by the device and throws an error in z2mqtt
             
             //#region Water Counters
@@ -214,6 +214,7 @@ const definition = {
             [170, 'sensor_name_32', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
             */
            //#endregion WIP
+            //#endregion
         ],
     },
     extend: [   
