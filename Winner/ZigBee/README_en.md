@@ -22,7 +22,7 @@ A version with the full list of the device DPs. Additional DPs will not work wit
 
 E.g: any `sensor_*` DP is a 4 byte integer:
 ```
-0xAA_BB_CC_DD , где:
+0xAA_BB_CC_DD where:
 [AA]    - command bit flags
 [BB]    - status bit flags
 [CC]    - signal strength
