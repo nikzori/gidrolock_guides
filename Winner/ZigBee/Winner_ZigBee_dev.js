@@ -324,23 +324,3 @@ const definition = {
 };
 
 module.exports = definition;
-
-//DP value masks
-const counterMask = 0b00000111_11111111_11111111_11111111;
-const sensorMasks = {
-    sensorSignal:           0x00_00_00_FF,                          
-    sensorBattery:          0x00_00_FF_00,                          
-
-    //booleans
-    online:                 0b00000000_00000010_00000000_00000000,  // Is Online
-    leak:                   0b00000000_00000100_00000000_00000000,  // Leak detected
-    ignore:                 0b00000000_00001000_00000000_00000000,  // Ignore leaks
-    securityMode:           0b00000000_00010000_00000000_00000000,  // Toggle high security mode: treat low senor battery or signal loss as an alarm condition
-    statusBatterySignal:    0b00000000_00100000_00000000_00000000,  // Indicates low charge or signal loss if high security mode is enabled
-}
-
-const converterExtension = {
-    ...tuya.valueConverter,
-
-    
-}
