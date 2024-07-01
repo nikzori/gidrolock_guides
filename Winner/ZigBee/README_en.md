@@ -16,9 +16,9 @@ Basic support for Winner. Available fields:
 - Error code
 
 ## Winner_ZigBee_dev.js
-**Works the same way as Basic version.**
+Added partial support for sensors.
 
-A version with the full list of the device DPs. Additional DPs will not work with Z2MQTT because of their non-standard implementation: you would need to write additional code for Z2MQTT libraries to properly parse the incoming data.
+A version with the full list of the device DPs. Additional DPs will not work with Z2MQTT out of the box because of their non-standard implementation: they need extra code to properly parse the incoming data.
 
 E.g: any `sensor_*` DP is a 4 byte integer:
 ```
