@@ -28,3 +28,4 @@ E.g: any `sensor_*` DP is a 4 byte integer:
 [CC]    - signal strength
 [DD]    - battery charge
 ```
+This will not be parsed accordingly right out of the box.
