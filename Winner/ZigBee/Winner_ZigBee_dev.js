@@ -235,7 +235,7 @@ const definition = {
             *   Unless you have a log of your own to track the values,
             *   this field is practically useless.
             */
-            //[105, 'journal', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})] 
+            //[105, 'journal', tuya.valueConverter.raw] 
             
             [106, 'channel_2', tuya.valueConverter.raw], 
 
@@ -244,97 +244,97 @@ const definition = {
             [108, 'sensor_name_1', tuya.valueConverter.raw],
             
             [109, 'sensor_2', convLocal.gidrolockWinnerSensor],
-            [110, 'sensor_name_2', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [110, 'sensor_name_2', tuya.valueConverter.raw],
             
             [111, 'sensor_3', convLocal.gidrolockWinnerSensor],
-            [112, 'sensor_name_3', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [112, 'sensor_name_3', tuya.valueConverter.raw],
 
             [113, 'sensor_4', convLocal.gidrolockWinnerSensor],
-            [114, 'sensor_name_4', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [114, 'sensor_name_4', tuya.valueConverter.raw],
 
             [115, 'sensor_5', convLocal.gidrolockWinnerSensor],
-            [116, 'sensor_name_5', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [116, 'sensor_name_5', tuya.valueConverter.raw],
             
             [117, 'sensor_6', convLocal.gidrolockWinnerSensor],
-            [118, 'sensor_name_6', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [118, 'sensor_name_6', tuya.valueConverter.raw],
             
             [119, 'sensor_7', convLocal.gidrolockWinnerSensor],
-            [120, 'sensor_name_7', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [120, 'sensor_name_7', tuya.valueConverter.raw],
             
             [121, 'sensor_8', convLocal.gidrolockWinnerSensor],
-            [122, 'sensor_name_8', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [122, 'sensor_name_8', tuya.valueConverter.raw],
             
             [123, 'sensor_9', convLocal.gidrolockWinnerSensor],
-            [124, 'sensor_name_9', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [124, 'sensor_name_9', tuya.valueConverter.raw],
             
             [125, 'sensor_10', convLocal.gidrolockWinnerSensor],
-            [126, 'sensor_name_10', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [126, 'sensor_name_10', tuya.valueConverter.raw],
             
             [127, 'sensor_11', convLocal.gidrolockWinnerSensor],
-            [128, 'sensor_name_11', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [128, 'sensor_name_11', tuya.valueConverter.raw],
             
             [129, 'sensor_12', convLocal.gidrolockWinnerSensor],
-            [130, 'sensor_name_12', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [130, 'sensor_name_12', tuya.valueConverter.raw],
             
             [131, 'sensor_13', convLocal.gidrolockWinnerSensor],
-            [132, 'sensor_name_13', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [132, 'sensor_name_13', tuya.valueConverter.raw],
             
             [133, 'sensor_14', convLocal.gidrolockWinnerSensor],
-            [134, 'sensor_name_14', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [134, 'sensor_name_14', tuya.valueConverter.raw],
             
             [135, 'sensor_15', convLocal.gidrolockWinnerSensor],
-            [136, 'sensor_name_15', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [136, 'sensor_name_15', tuya.valueConverter.raw],
             
             [137, 'sensor_16', convLocal.gidrolockWinnerSensor],
-            [138, 'sensor_name_16', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [138, 'sensor_name_16', tuya.valueConverter.raw],
             
             [139, 'sensor_17', convLocal.gidrolockWinnerSensor],
-            [140, 'sensor_name_17', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [140, 'sensor_name_17', tuya.valueConverter.raw],
             
             [141, 'sensor_18', convLocal.gidrolockWinnerSensor],
-            [142, 'sensor_name_18', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [142, 'sensor_name_18', tuya.valueConverter.raw],
             
             [143, 'sensor_19', convLocal.gidrolockWinnerSensor],
-            [144, 'sensor_name_19', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [144, 'sensor_name_19', tuya.valueConverter.raw],
             
             [145, 'sensor_20', convLocal.gidrolockWinnerSensor],
-            [146, 'sensor_name_20', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [146, 'sensor_name_20', tuya.valueConverter.raw],
             
             [147, 'sensor_21', convLocal.gidrolockWinnerSensor],
-            [148, 'sensor_name_21', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [148, 'sensor_name_21', tuya.valueConverter.raw],
             
             [149, 'sensor_22', convLocal.gidrolockWinnerSensor],
-            [150, 'sensor_name_22', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [150, 'sensor_name_22', tuya.valueConverter.raw],
             
             [151, 'sensor_23', convLocal.gidrolockWinnerSensor],
-            [152, 'sensor_name_23', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [152, 'sensor_name_23', tuya.valueConverter.raw],
             
             [153, 'sensor_24', convLocal.gidrolockWinnerSensor],
-            [154, 'sensor_name_24', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [154, 'sensor_name_24', tuya.valueConverter.raw],
             
             [155, 'sensor_25', convLocal.gidrolockWinnerSensor],
-            [156, 'sensor_name_25', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [156, 'sensor_name_25', tuya.valueConverter.raw],
             
             [157, 'sensor_26', convLocal.gidrolockWinnerSensor],
-            [158, 'sensor_name_26', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [158, 'sensor_name_26', tuya.valueConverter.raw],
             
             [159, 'sensor_27', convLocal.gidrolockWinnerSensor],
-            [160, 'sensor_name_27', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [160, 'sensor_name_27', tuya.valueConverter.raw],
             
             [161, 'sensor_28', convLocal.gidrolockWinnerSensor],
-            [162, 'sensor_name_28', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [162, 'sensor_name_28', tuya.valueConverter.raw],
             
             [163, 'sensor_29', convLocal.gidrolockWinnerSensor],
-            [164, 'sensor_name_29', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [164, 'sensor_name_29', tuya.valueConverter.raw],
             
             [165, 'sensor_30', convLocal.gidrolockWinnerSensor],
-            [166, 'sensor_name_30', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [166, 'sensor_name_30', tuya.valueConverter.raw],
             
             [167, 'sensor_31', convLocal.gidrolockWinnerSensor],
-            [168, 'sensor_name_31', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [168, 'sensor_name_31', tuya.valueConverter.raw],
             
             [169, 'sensor_32', convLocal.gidrolockWinnerSensor],
-            [170, 'sensor_name_32', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [170, 'sensor_name_32', tuya.valueConverter.raw],
            //#endregion
         ],
     },
