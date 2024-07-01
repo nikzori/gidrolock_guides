@@ -9,7 +9,6 @@ const tuya = require('zigbee-herdsman-converters/lib/tuya');
 const exp = require('constants');
 const { Numeric } = require('zigbee-herdsman-converters/lib/exposes');
 const { Binary } = require('zigbee-herdsman-converters/lib/exposes');
-const { default: converters } = require('zigbee-herdsman-converters/converters/fromZigbee');
 
 const convLocal = {
     gidrolockWinnerSensor: {
@@ -24,6 +23,10 @@ const convLocal = {
                 securityMode:           (Boolean)(v & 0b00000000_00010000_00000000_00000000),
                 statusBatterySignal:    (Boolean)(v & 0b00000000_00100000_00000000_00000000)
             }
+        },
+        to: (v) => {
+            let result = '0000000000' + Number(v.statusBatterySignal) + Number(v.securityMode) + Number(v.ignoreLeaks) + Number(v.leakDetected) + Number(v.isOnline) + Number(v.battery).toString(2).padStart(8, '0') + Number(v.signal).toString(2).padStart(8, '0');
+            return result;
         }
     }
 }
@@ -80,9 +83,9 @@ const definition = {
     onEvent: tuya.onEventSetTime,
     exposes: [
         exposes.presets.enum('fault', ea.STATE, ['low_battery', 'fault', 'lack_water', 'sensor_fault', 'motor_fault', 'low_temp']).withCategory('diagnostic'),
-        exposes.presets.binary('switch', ea.STATE_SET, true, false ).withLabel('Valve status').withDescription('Can not turn the alarm on. Use External vendor sensor for that.'),
+        exposes.presets.binary('switch', ea.STATE_SET, true, false ).withLabel('Valve status'),
         exposes.presets.binary('cleaning', ea.STATE_SET, true, false).withLabel('Cleaning Mode:'),
-        exposes.presets.binary('alarm', ea.STATE_SET, true, false),
+        exposes.presets.binary('alarm', ea.STATE_SET, true, false).withDescription('Can not turn the alarm on. Use External vendor sensor for that.'),
         exposes.presets.enum('battery', ea.STATE, ['10', '20', '30', '40', '50', '60', '70', '80', '90', '100', 'Plugged In']),
 
         exposes.presets.binary('channel_2', 0b010, true, false).withLabel("External vendor sensor").withDescription("A DP for an extra wired sensor. Triggers alarm on true."),
@@ -238,7 +241,7 @@ const definition = {
 
             //#region Sensors DPs
             [107, 'sensor_1', convLocal.gidrolockWinnerSensor],
-            [108, 'sensor_name_1', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
+            [108, 'sensor_name_1', tuya.valueConverter.raw],
             
             [109, 'sensor_2', convLocal.gidrolockWinnerSensor],
             [110, 'sensor_name_2', tuya.valueConverterBasic.lookup({'single': 0, 'double': 1, 'hold': 2})],
