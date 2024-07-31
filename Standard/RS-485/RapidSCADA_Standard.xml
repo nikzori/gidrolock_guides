@@ -8,14 +8,63 @@
     <DefByteOrder8 />
   </Options>
   <ElemGroups>
+    <ElemGroup active="false" dataBlock="InputRegisters" address="199" name="Имя устройства">
+      <Elem type="ushort" isBitMask="false" tagCode="1" name="1" />
+      <Elem type="ushort" isBitMask="false" tagCode="2" name="2" />
+      <Elem type="ushort" isBitMask="false" tagCode="3" name="3" />
+      <Elem type="ushort" isBitMask="false" tagCode="4" name="4" />
+      <Elem type="ushort" isBitMask="false" tagCode="5" name="5" />
+      <Elem type="ushort" isBitMask="false" tagCode="6" name="6" />
+    </ElemGroup>
+    <ElemGroup active="false" dataBlock="InputRegisters" address="249" name="Версия прошивки">
+      <Elem type="ushort" isBitMask="false" tagCode="1" name="1" />
+      <Elem type="ushort" isBitMask="false" tagCode="2" name="2" />
+      <Elem type="ushort" isBitMask="false" tagCode="3" name="3" />
+      <Elem type="ushort" isBitMask="false" tagCode="4" name="4" />
+      <Elem type="ushort" isBitMask="false" tagCode="5" name="5" />
+      <Elem type="ushort" isBitMask="false" tagCode="6" name="6" />
+    </ElemGroup>
     <ElemGroup active="true" dataBlock="Coils" address="1201" name="Состояние протечки">
       <Elem readOnly="false" tagCode="Состояние протечки" name="Состояние протечки" />
     </ElemGroup>
     <ElemGroup active="true" dataBlock="Coils" address="1202" name="Состояние крана">
       <Elem readOnly="true" tagCode="Состояние крана" name="Состояние крана" />
     </ElemGroup>
-    <ElemGroup active="true" dataBlock="InputRegisters" address="1214" name="RF">
-      <Elem type="ushort" isBitMask="false" tagCode="Количество радиодатчиков" name="Количество радиодатчиков" />
+    <ElemGroup active="true" dataBlock="Coils" address="3" name="Режим уборки">
+      <Elem readOnly="false" tagCode="Режим уборки" name="Режим уборки" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="Coils" address="10" name="Режим входа 1 - датчик/счетчик">
+      <Elem readOnly="false" tagCode="Вход 1" name="Вход 1" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="InputRegisters" address="1062" name="Импульсы счетчика 1">
+      <Elem type="uint" isBitMask="false" tagCode="Счетчик 1" name="Счетчик 1" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="HoldingRegisters" address="1066" name="Множитель счетчика 1">
+      <Elem type="ushort" readOnly="false" isBitMask="false" tagCode="Множитель 1" name="Множитель 1" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="Coils" address="11" name="Режим входа 2 - датчик/счетчик">
+      <Elem readOnly="false" tagCode="Вход 2" name="Вход 2" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="InputRegisters" address="1064" name="Импульсы счетчика 2">
+      <Elem type="uint" isBitMask="false" tagCode="Счетчик 2" name="Счетчик 2" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="HoldingRegisters" address="1067" name="Множитель счетчика 2">
+      <Elem type="ushort" readOnly="false" isBitMask="false" tagCode="Множитель 2" name="Множитель 2" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="DiscreteInputs" address="1204" name="Проводной датчик 1">
+      <Elem tagCode="Протечка 1" name="Протечка 1" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="DiscreteInputs" address="1205" name="Контроль обрыва 1">
+      <Elem tagCode="Обрыв 1" name="Обрыв 1" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="DiscreteInputs" address="1206" name="Проводной датчик 2">
+      <Elem tagCode="Протечка 2" name="Протечка 2" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="DiscreteInputs" address="1207" name="Контроль обрыва 2">
+      <Elem tagCode="Обрыв 2" name="Обрыв 2" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="InputRegisters" address="1215" name="Количество активных радиодатчиков">
+      <Elem type="ushort" isBitMask="false" tagCode="RF Count" name="RF Count" />
     </ElemGroup>
     <ElemGroup active="true" dataBlock="InputRegisters" address="1215" name="Состояние радиодатчиков">
       <Elem type="ushort" isBitMask="false" tagCode="Датчик 1" name="Датчик 1" />
@@ -41,27 +90,27 @@
       <Elem type="ushort" isBitMask="false" tagCode="Датчик 21" name="Датчик 21" />
     </ElemGroup>
     <ElemGroup active="true" dataBlock="InputRegisters" address="1247" name="Уровень сигнала">
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 1" name="Датчик 1" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 2" name="Датчик 2" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 3" name="Датчик 3" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 4" name="Датчик 4" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 5" name="Датчик 5" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 6" name="Датчик 6" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 7" name="Датчик 7" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 8" name="Датчик 8" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 9" name="Датчик 9" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 10" name="Датчик 10" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 11" name="Датчик 11" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 12" name="Датчик 12" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 13" name="Датчик 13" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 14" name="Датчик 14" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 15" name="Датчик 15" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 16" name="Датчик 16" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 17" name="Датчик 17" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 18" name="Датчик 18" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 19" name="Датчик 19" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 20" name="Датчик 20" />
-      <Elem type="ushort" isBitMask="false" tagCode="Датчик 21" name="Датчик 21" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 1" name="Сигнал датчика 1" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 2" name="Сигнал датчика 2" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 3" name="Сигнал датчика 3" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 4" name="Сигнал датчика 4" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 5" name="Сигнал датчика 5" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 6" name="Сигнал датчика 6" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 7" name="Сигнал датчика 7" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 8" name="Сигнал датчика 8" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 9" name="Сигнал датчика 9" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 10" name="Сигнал датчика 10" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 11" name="Сигнал датчика 11" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 12" name="Сигнал датчика 12" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 13" name="Сигнал датчика 13" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 14" name="Сигнал датчика 14" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 15" name="Сигнал датчика 15" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 16" name="Сигнал датчика 16" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 17" name="Сигнал датчика 17" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 18" name="Сигнал датчика 18" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 19" name="Сигнал датчика 19" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 20" name="Сигнал датчика 20" />
+      <Elem type="ushort" isBitMask="false" tagCode="Сигнал датчика 21" name="Сигнал датчика 21" />
     </ElemGroup>
   </ElemGroups>
   <Cmds />
