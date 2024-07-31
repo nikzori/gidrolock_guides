@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DeviceTemplate>
+  <Options>
+    <ZeroAddr>false</ZeroAddr>
+    <DecAddr>false</DecAddr>
+    <DefByteOrder2 />
+    <DefByteOrder4 />
+    <DefByteOrder8 />
+  </Options>
+  <ElemGroups>
+    <ElemGroup active="true" dataBlock="Coils" address="1201" name="Состояние протечки">
+      <Elem readOnly="false" tagCode="Состояние протечки" name="Состояние протечки" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="Coils" address="1202" name="Состояние крана">
+      <Elem readOnly="true" tagCode="Состояние крана" name="Состояние крана" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="InputRegisters" address="1214" name="RF">
+      <Elem type="ushort" isBitMask="false" tagCode="Количество радиодатчиков" name="Количество радиодатчиков" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="InputRegisters" address="1215" name="Состояние радиодатчиков">
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 1" name="Датчик 1" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 2" name="Датчик 2" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 3" name="Датчик 3" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 4" name="Датчик 4" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 5" name="Датчик 5" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 6" name="Датчик 6" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 7" name="Датчик 7" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 8" name="Датчик 8" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 9" name="Датчик 9" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 10" name="Датчик 10" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 11" name="Датчик 11" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 12" name="Датчик 12" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 13" name="Датчик 13" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 14" name="Датчик 14" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 15" name="Датчик 15" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 16" name="Датчик 16" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 17" name="Датчик 17" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 18" name="Датчик 18" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 19" name="Датчик 19" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 20" name="Датчик 20" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 21" name="Датчик 21" />
+    </ElemGroup>
+    <ElemGroup active="true" dataBlock="InputRegisters" address="1247" name="Уровень сигнала">
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 1" name="Датчик 1" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 2" name="Датчик 2" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 3" name="Датчик 3" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 4" name="Датчик 4" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 5" name="Датчик 5" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 6" name="Датчик 6" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 7" name="Датчик 7" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 8" name="Датчик 8" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 9" name="Датчик 9" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 10" name="Датчик 10" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 11" name="Датчик 11" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 12" name="Датчик 12" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 13" name="Датчик 13" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 14" name="Датчик 14" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 15" name="Датчик 15" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 16" name="Датчик 16" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 17" name="Датчик 17" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 18" name="Датчик 18" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 19" name="Датчик 19" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 20" name="Датчик 20" />
+      <Elem type="ushort" isBitMask="false" tagCode="Датчик 21" name="Датчик 21" />
+    </ElemGroup>
+  </ElemGroups>
+  <Cmds />
+</DeviceTemplate>
