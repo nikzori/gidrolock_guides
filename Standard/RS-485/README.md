@@ -1,4 +1,6 @@
 # Modbus ресурсы для Standard RS485
-``.xls`` файл содержит в себе последнюю версию таблицы адресов для общения с устройством через протокол Modbus. Адреса, помеченные синим и серым, (пока) не работают.
+``Modbus Register Map - Standard RS485 v1.3.xls`` файл содержит в себе последнюю версию таблицы адресов для общения с устройством через протокол Modbus.
 
-``.xml`` файл — это шаблон конфигурации для подключения Стандарта к системе [Rapid SCADA](https://rapidscada.ru/), так же через Modbus.
+``RapidSCADA_Standard.xml`` — шаблон конфигурации для подключения Стандарта к системе [Rapid SCADA](https://rapidscada.ru/).
+
+``Wirenboard-GIDROLOCK-Standard.json`` — шаблон конфигурации для подключения к устройству [Wirenboard](https://wirenboard.com/).

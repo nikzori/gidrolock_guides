@@ -1,4 +1,6 @@
 # Modbus registers for Standard RS485
-The ``.xls`` file contains the latest address table to communicate with the device via the Modbus protocol. Registers marked with blue or grey are not (yet) functional.
+``Modbus Register Map - Standard RS485 v1.3.xls`` — contains the lastest map for Modbus registers.
 
-``.xml`` is the config template that can be used to connect Standard to [Rapid SCADA](https://rapidscada.org/), also via Modbus.
+``RapidSCADA_Standard.xml`` — config file for [Rapid SCADA](https://rapidscada.org/).
+
+``Wirenboard-GIDROLOCK-Standard.json`` — config file for [Wirenboard](https://wirenboard.com/). Place it at ``/etc/wb-mqtt-serial.conf.d/templates/`` .
