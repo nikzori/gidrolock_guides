@@ -3,4 +3,4 @@
 
 ``RapidSCADA_Standard.xml`` — шаблон конфигурации для подключения Стандарта к системе [Rapid SCADA](https://rapidscada.ru/).
 
-``Wirenboard-GIDROLOCK-Standard.json`` — шаблон конфигурации для подключения к устройству [Wirenboard](https://wirenboard.com/).
+``Wirenboard-GIDROLOCK-Standard.json`` — шаблон конфигурации для подключения к устройству [Wirenboard](https://wirenboard.com/). Размещается в папке ``/etc/wb-mqtt-serial.conf.d/templates/``.

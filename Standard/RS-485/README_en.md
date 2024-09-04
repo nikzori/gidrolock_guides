@@ -3,4 +3,4 @@
 
 ``RapidSCADA_Standard.xml`` — config file for [Rapid SCADA](https://rapidscada.org/).
 
-``Wirenboard-GIDROLOCK-Standard.json`` — config file for [Wirenboard](https://wirenboard.com/). Place it at ``/etc/wb-mqtt-serial.conf.d/templates/`` .
+``Wirenboard-GIDROLOCK-Standard.json`` — config file for [Wirenboard](https://wirenboard.com/). Place it at ``/etc/wb-mqtt-serial.conf.d/templates/``.
