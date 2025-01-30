@@ -1,14 +1,10 @@
-const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
-const tz = require('zigbee-herdsman-converters/converters/toZigbee');
 const exposes = require('zigbee-herdsman-converters/lib/exposes');
-const reporting = require('zigbee-herdsman-converters/lib/reporting');
-const modernExtend = require('zigbee-herdsman-converters/lib/modernExtend');
 const e = exposes.presets;
 const ea = exposes.access;
 const tuya = require('zigbee-herdsman-converters/lib/tuya');
-const exp = require('constants');
 const { Numeric } = require('zigbee-herdsman-converters/lib/exposes');
 const { Binary } = require('zigbee-herdsman-converters/lib/exposes');
+
 
 const convLocal = {
     gidrolockWinnerSensor: {
@@ -21,20 +17,68 @@ const convLocal = {
                 leakDetected:           (Boolean)(v & 0b00000000_00000100_00000000_00000000),
                 ignoreLeaks:            (Boolean)(v & 0b00000000_00001000_00000000_00000000),
                 securityMode:           (Boolean)(v & 0b00000000_00010000_00000000_00000000),
-                statusBatterySignal:    (Boolean)(v & 0b00000000_00100000_00000000_00000000)
+                statusBatterySignal:    (Boolean)(v & 0b00000000_00100000_00000000_00000000)    // `true` in case of low battery charge 
+                                                                                                //  or sensor not responding in 20+ hours
             }
         },
         to: (v) => {
-            let result = '0000000000' + Number(v.statusBatterySignal) + Number(v.securityMode) + Number(v.ignoreLeaks) + Number(v.leakDetected) + Number(v.isOnline) + Number(v.battery).toString(2).padStart(8, '0') + Number(v.signal).toString(2).padStart(8, '0');
-            return result;
+            return 0x03_00_00_00; 
         }
+    },
+    waterMeter: {
+        from: (v) => { return v & 0b00000111_11111111_11111111_11111111; },
+        to: (v) => { return Number.parseInt(v); }
     }
 }
 
 const tzDatapoints = {
     ...tuya.tz.datapoints,
-    key: ['switch', 'percent_control', 'fault', 'weather_delay', 'countdown', 'smart_weather', 'minihum_set', 'alarm', 'battery', 'cleaning', 'journal', 'channel_2',
-        'sensor_1', 'sensor_1.signal',     'sensor_name_1', 
+    key: [
+        'switch', 'percent_control', 'fault', 'weather_delay', 'countdown', 
+        'smart_weather', 'minihum_set', 'alarm', 'battery', 'cleaning', 
+        'journal', 'channel_2', 'device_cmd',
+        'sensor_1',     'sensor_name_1', 
+        'sensor_2',     'sensor_name_2', 
+        'sensor_3',     'sensor_name_3', 
+        'sensor_4',     'sensor_name_4', 
+        'sensor_5',     'sensor_name_5', 
+        'sensor_6',     'sensor_name_6', 
+        'sensor_7',     'sensor_name_7', 
+        'sensor_8',     'sensor_name_8', 
+        'sensor_9',     'sensor_name_9', 
+        'sensor_10',    'sensor_name_10', 
+        'sensor_11',    'sensor_name_11', 
+        'sensor_12',    'sensor_name_12', 
+        'sensor_13',    'sensor_name_13', 
+        'sensor_14',    'sensor_name_14', 
+        'sensor_15',    'sensor_name_15', 
+        'sensor_16',    'sensor_name_16',
+        'sensor_17',    'sensor_name_17', 
+        'sensor_18',    'sensor_name_18', 
+        'sensor_19',    'sensor_name_19', 
+        'sensor_20',    'sensor_name_20', 
+        'sensor_21',    'sensor_name_21', 
+        'sensor_22',    'sensor_name_22', 
+        'sensor_23',    'sensor_name_23', 
+        'sensor_24',    'sensor_name_24', 
+        'sensor_25',    'sensor_name_25', 
+        'sensor_26',    'sensor_name_26', 
+        'sensor_27',    'sensor_name_27', 
+        'sensor_28',    'sensor_name_28', 
+        'sensor_29',    'sensor_name_29', 
+        'sensor_30',    'sensor_name_30', 
+        'sensor_31',    'sensor_name_31', 
+        'sensor_32',    'sensor_name_32' 
+    ]
+}
+
+const fzDatapoints = {
+    ...tuya.fz.datapoints,
+    key: [
+        'switch', 'percent_control', 'fault', 'weather_delay', 'countdown', 
+        'smart_weather', 'minihum_set', 'alarm', 'battery', 'cleaning', 
+        'journal', 'channel_2', 'device_cmd',
+        'sensor_1',     'sensor_name_1', 
         'sensor_2',     'sensor_name_2', 
         'sensor_3',     'sensor_name_3', 
         'sensor_4',     'sensor_name_4', 
@@ -78,7 +122,7 @@ const definition = {
     model: 'Gidrolock Winner',
     vendor: 'Gidrolock',
     description: 'Gidrolock smart water valve',
-    fromZigbee: [tuya.fz.datapoints],
+    fromZigbee: [fzDatapoints],
     toZigbee: [tzDatapoints],
     onEvent: tuya.onEventSetTime,
     exposes: [
@@ -88,107 +132,114 @@ const definition = {
         exposes.presets.binary('alarm', ea.STATE_SET, true, false).withDescription('Can turn the alarm off, but not on. Use External vendor sensor for that.'),
         exposes.presets.enum('battery', ea.STATE, ['10', '20', '30', '40', '50', '60', '70', '80', '90', '100', 'Plugged In']),
 
-        exposes.presets.binary('channel_2', 0b010, true, false).withLabel("External vendor sensor").withDescription("A DP to trigger alarm via Smart Life scenes. Triggers alarm on true, but does not turn the alarm off."),
+        exposes.presets.binary('channel_2', ea.STATE_SET, true, false).withLabel("External vendor sensor").withDescription("A DP to trigger alarm via Smart Life scenes. Triggers alarm on true, but does not turn the alarm off."),
 
+        //exposes.presets.enum('weather_delay', ea.STATE_SET, ['1', '10']).withLabel("Multiplier 1").withDescription("Water meter multiplier"),
+        exposes.presets.numeric('countdown', ea.SET).withLabel("Water Meter 1"),
 
-        /** Sensor Fields **/
+        //exposes.presets.enum('smart_weather', ea.STATE_SET, ['1', '10']).withLabel("Multiplier 2").withDescription("Water meter multiplier"),
+        exposes.presets.numeric('minihum_set', ea.STATE_SET).withLabel("Water Meter 2"),
 
-        exposes.presets.text('sensor_name_1', ea.STATE_SET),
-        exposes.presets.composite('sensor_1', 'sensor_1', ea.ALL).withFeature(new Binary('leakDetected', ea.STATE_GET, true, false)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.numeric('device_cmd', ea.STATE).withLabel("Device CMD").withDescription("Used to issue commands to the device."),
 
-        exposes.presets.text('sensor_name_2', ea.ALL),
-        exposes.presets.composite('sensor_2', 'sensor_2', ea.ALL).withFeature(new Binary('leakDetected', ea.STATE_GET, true, false)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        //#region Sensor Fields
 
-        exposes.presets.text('sensor_name_3', ea.ALL),
-        exposes.presets.composite('sensor_3', 'sensor_3', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_01', ea.STATE_SET),
+        exposes.presets.composite('sensor_01', 'sensor_1', ea.STATE).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_4', ea.ALL),
-        exposes.presets.composite('sensor_4', 'sensor_4', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_02', ea.STATE_SET),
+        exposes.presets.composite('sensor_02', 'sensor_2',  ea.STATE).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_5', ea.ALL),
-        exposes.presets.composite('sensor_5', 'sensor_5', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_03', ea.STATE_SET),
+        exposes.presets.composite('sensor_03', 'sensor_3', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_6', ea.ALL),
-        exposes.presets.composite('sensor_6', 'sensor_6', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_04', ea.STATE_SET),
+        exposes.presets.composite('sensor_04', 'sensor_4', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_7', ea.ALL),
-        exposes.presets.composite('sensor_7', 'sensor_7', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_05', ea.STATE_SET),
+        exposes.presets.composite('sensor_05', 'sensor_5', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_8', ea.ALL),
-        exposes.presets.composite('sensor_8', 'sensor_8', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_06', ea.STATE_SET),
+        exposes.presets.composite('sensor_06', 'sensor_6', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_9', ea.ALL),
-        exposes.presets.composite('sensor_9', 'sensor_9', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_07', ea.STATE_SET),
+        exposes.presets.composite('sensor_07', 'sensor_7', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_10', ea.ALL),
-        exposes.presets.composite('sensor_10', 'sensor_10', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_08', ea.STATE_SET),
+        exposes.presets.composite('sensor_08', 'sensor_8', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+
+        exposes.presets.text('sensor_name_09', ea.STATE_SET),
+        exposes.presets.composite('sensor_09', 'sensor_9', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+
+        exposes.presets.text('sensor_name_10', ea.STATE_SET),
+        exposes.presets.composite('sensor_10', 'sensor_10', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
         
-        exposes.presets.text('sensor_name_11', ea.ALL),
-        exposes.presets.composite('sensor_11', 'sensor_11', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_11', ea.STATE_SET),
+        exposes.presets.composite('sensor_11', 'sensor_11', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_12', ea.ALL),
-        exposes.presets.composite('sensor_12', 'sensor_12', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_12', ea.STATE_SET),
+        exposes.presets.composite('sensor_12', 'sensor_12', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_13', ea.ALL),
-        exposes.presets.composite('sensor_13', 'sensor_13', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_13', ea.STATE_SET),
+        exposes.presets.composite('sensor_13', 'sensor_13', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_14', ea.ALL),
-        exposes.presets.composite('sensor_14', 'sensor_14', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_14', ea.STATE_SET),
+        exposes.presets.composite('sensor_14', 'sensor_14', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_15', ea.ALL),
-        exposes.presets.composite('sensor_15', 'sensor_15', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_15', ea.STATE_SET),
+        exposes.presets.composite('sensor_15', 'sensor_15', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_16', ea.ALL),
-        exposes.presets.composite('sensor_16', 'sensor_16', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_16', ea.STATE_SET),
+        exposes.presets.composite('sensor_16', 'sensor_16', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_17', ea.ALL),
-        exposes.presets.composite('sensor_17', 'sensor_17', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_17', ea.STATE_SET),
+        exposes.presets.composite('sensor_17', 'sensor_17', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_18', ea.ALL),
-        exposes.presets.composite('sensor_18', 'sensor_18', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_18', ea.STATE_SET),
+        exposes.presets.composite('sensor_18', 'sensor_18', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_19', ea.ALL),
-        exposes.presets.composite('sensor_19', 'sensor_19', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_19', ea.STATE_SET),
+        exposes.presets.composite('sensor_19', 'sensor_19', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_20', ea.ALL),
-        exposes.presets.composite('sensor_20', 'sensor_20', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_20', ea.STATE_SET),
+        exposes.presets.composite('sensor_20', 'sensor_20', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_21', ea.ALL),
-        exposes.presets.composite('sensor_21', 'sensor_21', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_21', ea.STATE_SET),
+        exposes.presets.composite('sensor_21', 'sensor_21', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_22', ea.ALL),
-        exposes.presets.composite('sensor_22', 'sensor_22', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_22', ea.STATE_SET),
+        exposes.presets.composite('sensor_22', 'sensor_22', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_23', ea.ALL),
-        exposes.presets.composite('sensor_23', 'sensor_23', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_23', ea.STATE_SET),
+        exposes.presets.composite('sensor_23', 'sensor_23', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_24', ea.ALL),
-        exposes.presets.composite('sensor_24', 'sensor_24', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_24', ea.STATE_SET),
+        exposes.presets.composite('sensor_24', 'sensor_24', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_25', ea.ALL),
-        exposes.presets.composite('sensor_25', 'sensor_25', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_25', ea.STATE_SET),
+        exposes.presets.composite('sensor_25', 'sensor_25', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_26', ea.ALL),
-        exposes.presets.composite('sensor_26', 'sensor_26', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_26', ea.STATE_SET),
+        exposes.presets.composite('sensor_26', 'sensor_26', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_27', ea.ALL),
-        exposes.presets.composite('sensor_27', 'sensor_27', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_27', ea.STATE_SET),
+        exposes.presets.composite('sensor_27', 'sensor_27', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_28', ea.ALL),
-        exposes.presets.composite('sensor_28', 'sensor_28', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_28', ea.STATE_SET),
+        exposes.presets.composite('sensor_28', 'sensor_28', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_29', ea.ALL),
-        exposes.presets.composite('sensor_29', 'sensor_29', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_29', ea.STATE_SET),
+        exposes.presets.composite('sensor_29', 'sensor_29', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_30', ea.ALL),
-        exposes.presets.composite('sensor_30', 'sensor_30', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_30', ea.STATE_SET),
+        exposes.presets.composite('sensor_30', 'sensor_30', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_31', ea.ALL),
-        exposes.presets.composite('sensor_31', 'sensor_31', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        exposes.presets.text('sensor_name_31', ea.STATE_SET),
+        exposes.presets.composite('sensor_31', 'sensor_31', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
 
-        exposes.presets.text('sensor_name_32', ea.ALL),
-        exposes.presets.composite('sensor_32', 'sensor_32', ea.ALL).withFeature(new Numeric('signal', ea.STATE_GET)).withFeature(new Numeric('battery', ea.STATE_GET)).withFeature(new Binary('isOnline', ea.STATE_GET, true, false)).withFeature(new Binary('leakDetected', ea.GET, true, false)).withFeature(new Binary('securityMode', ea.SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.GET, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
-
+        exposes.presets.text('sensor_name_32', ea.STATE_SET),
+        exposes.presets.composite('sensor_32', 'sensor_32', ea.STATE).withFeature(new Binary('isOnline', ea.STATE, true, false)).withFeature(new Binary('leakDetected', ea.STATE, true, false)).withFeature(new Numeric('signal', ea.STATE)).withFeature(new Numeric('battery', ea.STATE)).withFeature(new Binary('securityMode', ea.STATE_SET, true, false)).withFeature(new Binary('statusBatterySignal', ea.STATE, true, false)).withFeature(new Binary('ignoreLeaks', ea.STATE_SET, true, false)),
+        
     ],
     meta: {
         tuyaDatapoints: [
@@ -196,9 +247,9 @@ const definition = {
             //[2, 'percent_control', tuya.valueConverter.raw], //don't even know what this is
             [4, 'fault', tuya.valueConverter.raw],
             [10, 'weather_delay', tuya.valueConverter.raw],
-            [11, 'countdown', tuya.valueConverter.raw],
+            [11, 'countdown', convLocal.waterMeter],
             [13, 'smart_weather', tuya.valueConverter.raw],
-            [21, 'minihum_set', tuya.valueConverter.raw],
+            [21, 'minihum_set', convLocal.waterMeter],
             [101, 'alarm', tuya.valueConverter.raw],
             [102, 
                 'battery', 
@@ -213,10 +264,13 @@ const definition = {
                     80: tuya.enum(7), 
                     90: tuya.enum(8), 
                     100: tuya.enum(9), 
-                    'Plugged in': tuya.enum(10)})],
+                    'Plugged in': tuya.enum(10)}
+                )
+            ],
 
-            
+            //#region Device CMD
             /**
+             * 
              * Device_CMD: a numeric DP used to issue commands to Winner.
              * Useless as is, but you can try to use it to issue commands via MQTT 
              * 
@@ -226,6 +280,8 @@ const definition = {
              * Last byte is used for the sensor number (1-32), e.g: 0x01_00_00_0F - replace sensor 15
              * 
              * 0x01_00_00_00 - добавление/замена датчика (замкнуть контакты WSR) | adding/replacing sensor (close the circuit on WSR)                   
+             * 
+             * WIP!!! 
              * 0x02_00_00_00 - удаление датчика | remove sensor
              * 0x03_00_00_00 - включить игнор аварии датчика | enable ignore alarm on specific sensor
              * 0x04_00_00_00 - отключить игнор аварии датчика | disable ignore alarm on specific sensor
