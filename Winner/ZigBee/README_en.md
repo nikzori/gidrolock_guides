@@ -16,4 +16,4 @@ Basic support for Winner. Available fields:
 - Error code
 
 ## win.dev.js
-A version with the full list of the device DPs. See commented out areas inside the file for more info on commands.
+A version with the full list of the device DPs. See commented out areas inside the file for more info on commands. Adding new wireless sensors can be done by posting the value `16777216`.
