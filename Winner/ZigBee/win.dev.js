@@ -8,13 +8,11 @@ const { Binary } = require('zigbee-herdsman-converters/lib/exposes');
 
 const convLocal = {
     gidrolockWinnerSensor: {
-        vCurrent: null,
         from: (v) => {
             console.error("Incoming sensor: " + v);
-            vCurrent = v;
             return {
-                signal:                 (v & 0x00_00_00_FF),
-                battery:                (v & 0x00_00_FF_00),
+                battery:                (v & 0xFF),
+                signal:                 (v >> 8) & 0xFF,
 
                 isOnline:               (Boolean)(v & 0b00000000_00000010_00000000_00000000),
                 leakDetected:           (Boolean)(v & 0b00000000_00000100_00000000_00000000),
@@ -26,7 +24,7 @@ const convLocal = {
         },
     },
     waterMeter: {
-        from: (v) => { return v & 0b00000111_11111111_11111111_11111111; },
+        from: (v) => { return v & 0x07_FF_FF_FF; },
         to: (v) => { return Number.parseInt(v); }
     }
 }
