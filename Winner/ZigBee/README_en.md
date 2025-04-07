@@ -1,3 +1,5 @@
+[RU](README.md) | EN
+
 # ZigBee2MQTT: config files
 Extension files for ZigBee2MQTT; only one of the files is required for device support.
 Extract the file into the `/data` folder. Add the following lines to `configuration.yaml` file in the same folder:
