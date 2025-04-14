@@ -303,6 +303,16 @@
                 "group": "water_sensors",
                 "type" : "switch"
             },
+            
+            {
+                "name" : "WSR Sensors - Registered Total",
+                "id" : "wsrTotal",
+                "reg_type" : "input",
+                "address" : 1214,
+                "group": "water_sensors",
+                "type" : "value"
+            },
+
             {
                 "name" : "WSR Sensors - No response in last 24hrs",
                 "id" : "wsrSignalLost",
@@ -347,12 +357,453 @@
             },
 
             {
-                "name" : "WSR Sensors - Registered Total",
-                "id" : "wsrTotal",
-                "reg_type" : "input",
-                "address" : 1214,
-                "group": "water_sensors",
-                "type" : "value"
+                "name" : "WSP 1 - Ignore Alarm",
+                "id" : "wsp1Ignore",
+                "reg_type" : "coil",
+                "address" : 768,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 2 - Ignore Alarm",
+                "id" : "wsp2Ignore",
+                "reg_type" : "coil",
+                "address" : 769,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 3 - Ignore Alarm",
+                "id" : "wsp3Ignore",
+                "reg_type" : "coil",
+                "address" : 770,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 4 - Ignore Alarm",
+                "id" : "wsp4Ignore",
+                "reg_type" : "coil",
+                "address" : 771,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 5 - Ignore Alarm",
+                "id" : "wsp5Ignore",
+                "reg_type" : "coil",
+                "address" : 772,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 6 - Ignore Alarm",
+                "id" : "wsp6Ignore",
+                "reg_type" : "coil",
+                "address" : 773,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 7 - Ignore Alarm",
+                "id" : "wsp7Ignore",
+                "reg_type" : "coil",
+                "address" : 774,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 1 - Ignore Alarm",
+                "id" : "wsr1Ignore",
+                "reg_type" : "coil",
+                "address" : 775,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 2 - Ignore Alarm",
+                "id" : "wsr2Ignore",
+                "reg_type" : "coil",
+                "address" : 776,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 3 - Ignore Alarm",
+                "id" : "wsr3Ignore",
+                "reg_type" : "coil",
+                "address" : 777,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 4 - Ignore Alarm",
+                "id" : "wsr4Ignore",
+                "reg_type" : "coil",
+                "address" : 778,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 5 - Ignore Alarm",
+                "id" : "wsr5Ignore",
+                "reg_type" : "coil",
+                "address" : 779,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 6 - Ignore Alarm",
+                "id" : "wsr6Ignore",
+                "reg_type" : "coil",
+                "address" : 780,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 7 - Ignore Alarm",
+                "id" : "wsr7Ignore",
+                "reg_type" : "coil",
+                "address" : 781,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 8 - Ignore Alarm",
+                "id" : "wsr8Ignore",
+                "reg_type" : "coil",
+                "address" : 782,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 9 - Ignore Alarm",
+                "id" : "wsr9Ignore",
+                "reg_type" : "coil",
+                "address" : 783,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 10 - Ignore Alarm",
+                "id" : "wsr10Ignore",
+                "reg_type" : "coil",
+                "address" : 784,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 11 - Ignore Alarm",
+                "id" : "wsr11Ignore",
+                "reg_type" : "coil",
+                "address" : 785,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 12 - Ignore Alarm",
+                "id" : "wsr12Ignore",
+                "reg_type" : "coil",
+                "address" : 786,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 13 - Ignore Alarm",
+                "id" : "wsr13Ignore",
+                "reg_type" : "coil",
+                "address" : 787,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 14 - Ignore Alarm",
+                "id" : "wsr14Ignore",
+                "reg_type" : "coil",
+                "address" : 788,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 15 - Ignore Alarm",
+                "id" : "wsr15Ignore",
+                "reg_type" : "coil",
+                "address" : 789,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 16 - Ignore Alarm",
+                "id" : "wsr16Ignore",
+                "reg_type" : "coil",
+                "address" : 790,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 17 - Ignore Alarm",
+                "id" : "wsr17Ignore",
+                "reg_type" : "coil",
+                "address" : 791,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 18 - Ignore Alarm",
+                "id" : "wsr18Ignore",
+                "reg_type" : "coil",
+                "address" : 792,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 19 - Ignore Alarm",
+                "id" : "wsr19Ignore",
+                "reg_type" : "coil",
+                "address" : 793,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 20 - Ignore Alarm",
+                "id" : "wsr20Ignore",
+                "reg_type" : "coil",
+                "address" : 794,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 21 - Ignore Alarm",
+                "id" : "wsr21Ignore",
+                "reg_type" : "coil",
+                "address" : 795,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+
+            {
+                "name" : "WSP 1 - High Security Mode",
+                "id" : "wsp1Security",
+                "reg_type" : "coil",
+                "address" : 800,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 2 - High Security Mode",
+                "id" : "wsp2Security",
+                "reg_type" : "coil",
+                "address" : 801,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 3 - High Security Mode",
+                "id" : "wsp3Security",
+                "reg_type" : "coil",
+                "address" : 802,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 4 - High Security Mode",
+                "id" : "wsp4Security",
+                "reg_type" : "coil",
+                "address" : 803,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 5 - High Security Mode",
+                "id" : "wsp5Security",
+                "reg_type" : "coil",
+                "address" : 804,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 6 - High Security Mode",
+                "id" : "wsp6Security",
+                "reg_type" : "coil",
+                "address" : 805,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSP 7 - High Security Mode",
+                "id" : "wsp7Security",
+                "reg_type" : "coil",
+                "address" : 806,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 1 - High Security Mode",
+                "id" : "wsr1Security",
+                "reg_type" : "coil",
+                "address" : 807,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 2 - High Security Mode",
+                "id" : "wsr2Security",
+                "reg_type" : "coil",
+                "address" : 808,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 3 - High Security Mode",
+                "id" : "wsr3Security",
+                "reg_type" : "coil",
+                "address" : 809,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 4 - High Security Mode",
+                "id" : "wsr4Security",
+                "reg_type" : "coil",
+                "address" : 810,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 5 - High Security Mode",
+                "id" : "wsr5Security",
+                "reg_type" : "coil",
+                "address" : 811,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 6 - High Security Mode",
+                "id" : "wsr6Security",
+                "reg_type" : "coil",
+                "address" : 812,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 7 - High Security Mode",
+                "id" : "wsr7Security",
+                "reg_type" : "coil",
+                "address" : 813,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 8 - High Security Mode",
+                "id" : "wsr8Security",
+                "reg_type" : "coil",
+                "address" : 814,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 9 - High Security Mode",
+                "id" : "wsr9Security",
+                "reg_type" : "coil",
+                "address" : 815,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 10 - High Security Mode",
+                "id" : "wsr10Security",
+                "reg_type" : "coil",
+                "address" : 816,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 11 - High Security Mode",
+                "id" : "wsr11Security",
+                "reg_type" : "coil",
+                "address" : 817,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 12 - High Security Mode",
+                "id" : "wsr12Security",
+                "reg_type" : "coil",
+                "address" : 818,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 13 - High Security Mode",
+                "id" : "wsr13Security",
+                "reg_type" : "coil",
+                "address" : 819,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 14 - High Security Mode",
+                "id" : "wsr14Security",
+                "reg_type" : "coil",
+                "address" : 820,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 15 - High Security Mode",
+                "id" : "wsr15Security",
+                "reg_type" : "coil",
+                "address" : 821,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 16 - High Security Mode",
+                "id" : "wsr16Security",
+                "reg_type" : "coil",
+                "address" : 822,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 17 - High Security Mode",
+                "id" : "wsr17Security",
+                "reg_type" : "coil",
+                "address" : 823,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 18 - High Security Mode",
+                "id" : "wsr18Security",
+                "reg_type" : "coil",
+                "address" : 824,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 19 - High Security Mode",
+                "id" : "wsr19Security",
+                "reg_type" : "coil",
+                "address" : 825,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 20 - High Security Mode",
+                "id" : "wsr20Security",
+                "reg_type" : "coil",
+                "address" : 826,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR 21 - High Security Mode",
+                "id" : "wsr21Ignore",
+                "reg_type" : "coil",
+                "address" : 827,
+                "group" : "g_general",
+                "type" : "switch"
             },
 
             {
@@ -737,10 +1188,66 @@
 
 
             {
+				"name" : "WSP 1 - Alarm Flag",
+				"id" : "wsp1Alarm",
+				"reg_type" : "discrete",
+				"address" : 1344,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSP 2 - Alarm Flag",
+				"id" : "wsp2Alarm",
+				"reg_type" : "discrete",
+				"address" : 1345,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSP 3 - Alarm Flag",
+				"id" : "wsr3Alarm",
+				"reg_type" : "discrete",
+				"address" : 1346,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSP 4 - Alarm Flag",
+				"id" : "wsr4Alarm",
+				"reg_type" : "discrete",
+				"address" : 1347,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSP 5 - Alarm Flag",
+				"id" : "wsr5Alarm",
+				"reg_type" : "discrete",
+				"address" : 1348,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSP 6 - Alarm Flag",
+				"id" : "wsr6Alarm",
+				"reg_type" : "discrete",
+				"address" : 1349,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSP 7 - Alarm Flag",
+				"id" : "wsr7Alarm",
+				"reg_type" : "discrete",
+				"address" : 1350,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+            {
 				"name" : "WSR 1 - Alarm Flag",
 				"id" : "wsr1Alarm",
 				"reg_type" : "discrete",
-				"address" : 1346,
+				"address" : 1351,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -748,7 +1255,7 @@
 				"name" : "WSR 2 - Alarm Flag",
 				"id" : "wsr2Alarm",
 				"reg_type" : "discrete",
-				"address" : 1347,
+				"address" : 1352,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -756,7 +1263,7 @@
 				"name" : "WSR 3 - Alarm Flag",
 				"id" : "wsr3Alarm",
 				"reg_type" : "discrete",
-				"address" : 1348,
+				"address" : 1353,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -764,7 +1271,7 @@
 				"name" : "WSR 4 - Alarm Flag",
 				"id" : "wsr4Alarm",
 				"reg_type" : "discrete",
-				"address" : 1349,
+				"address" : 1354,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -772,7 +1279,7 @@
 				"name" : "WSR 5 - Alarm Flag",
 				"id" : "wsr5Alarm",
 				"reg_type" : "discrete",
-				"address" : 1350,
+				"address" : 1355,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -780,7 +1287,7 @@
 				"name" : "WSR 6 - Alarm Flag",
 				"id" : "wsr6Alarm",
 				"reg_type" : "discrete",
-				"address" : 1351,
+				"address" : 1356,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -788,7 +1295,7 @@
 				"name" : "WSR 7 - Alarm Flag",
 				"id" : "wsr7Alarm",
 				"reg_type" : "discrete",
-				"address" : 1352,
+				"address" : 1357,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -796,7 +1303,7 @@
 				"name" : "WSR 8 - Alarm Flag",
 				"id" : "wsr8Alarm",
 				"reg_type" : "discrete",
-				"address" : 1353,
+				"address" : 1358,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -804,7 +1311,7 @@
 				"name" : "WSR 9 - Alarm Flag",
 				"id" : "wsr9Alarm",
 				"reg_type" : "discrete",
-				"address" : 1354,
+				"address" : 1359,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -812,7 +1319,7 @@
 				"name" : "WSR 10 - Alarm Flag",
 				"id" : "wsr10Alarm",
 				"reg_type" : "discrete",
-				"address" : 1355,
+				"address" : 1360,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -820,7 +1327,7 @@
 				"name" : "WSR 11 - Alarm Flag",
 				"id" : "wsr11Alarm",
 				"reg_type" : "discrete",
-				"address" : 1356,
+				"address" : 1361,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -828,7 +1335,7 @@
 				"name" : "WSR 12 - Alarm Flag",
 				"id" : "wsr12Alarm",
 				"reg_type" : "discrete",
-				"address" : 1357,
+				"address" : 1362,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -836,7 +1343,7 @@
 				"name" : "WSR 13 - Alarm Flag",
 				"id" : "wsr13Alarm",
 				"reg_type" : "discrete",
-				"address" : 1358,
+				"address" : 1363,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -844,7 +1351,7 @@
 				"name" : "WSR 14 - Alarm Flag",
 				"id" : "wsr14Alarm",
 				"reg_type" : "discrete",
-				"address" : 1359,
+				"address" : 1364,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -852,7 +1359,7 @@
 				"name" : "WSR 15 - Alarm Flag",
 				"id" : "wsr15Alarm",
 				"reg_type" : "discrete",
-				"address" : 1360,
+				"address" : 1365,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -860,7 +1367,7 @@
 				"name" : "WSR 16 - Alarm Flag",
 				"id" : "wsr16Alarm",
 				"reg_type" : "discrete",
-				"address" : 1361,
+				"address" : 1366,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -868,7 +1375,7 @@
 				"name" : "WSR 17 - Alarm Flag",
 				"id" : "wsr17Alarm",
 				"reg_type" : "discrete",
-				"address" : 1362,
+				"address" : 1367,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -876,7 +1383,7 @@
 				"name" : "WSR 18 - Alarm Flag",
 				"id" : "wsr18Alarm",
 				"reg_type" : "discrete",
-				"address" : 1363,
+				"address" : 1368,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -884,7 +1391,7 @@
 				"name" : "WSR 19 - Alarm Flag",
 				"id" : "wsr19Alarm",
 				"reg_type" : "discrete",
-				"address" : 1364,
+				"address" : 1369,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -892,7 +1399,7 @@
 				"name" : "WSR 20 - Alarm Flag",
 				"id" : "wsr20Alarm",
 				"reg_type" : "discrete",
-				"address" : 1365,
+				"address" : 1370,
 				"group" : "water_sensors",
 				"type" : "switch"
 			},
@@ -900,7 +1407,7 @@
 				"name" : "WSR 21 - Alarm Flag",
 				"id" : "wsr21Alarm",
 				"reg_type" : "discrete",
-				"address" : 1366,
+				"address" : 1371,
 				"group" : "water_sensors",
 				"type" : "switch"
 			}
