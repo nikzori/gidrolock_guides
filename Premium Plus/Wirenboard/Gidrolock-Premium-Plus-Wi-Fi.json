@@ -120,6 +120,14 @@
                 "type" : "value"
             },
             {
+                "name" : "Radio Relay Setting",
+                "id" : "relaySetting",
+                "reg_type" : "holding",
+                "address" : 974,
+                "group" : "g_general",
+                "type" : "value"
+            },
+            {
                 "name" : "Input FUN",
                 "id" : "FUN",
                 "reg_type" : "discrete",
@@ -156,87 +164,163 @@
                 "type" : "value"
             },
 
-            {
-                "name" : "Zone 1 - Water Counter Mode",
-                "id" : "zone1Counter",
-                "reg_type" : "coil",
-                "address" : 10,
-                "group" : "g_general",
-                "type" : "switch"
-            },
-            {
-                "name" : "Counter 1 - Ticks",
-                "id" : "counter1Ticks",
-                "reg_type" : "input",
-                "address" : 1062,
-                "format" : "u32",
-                "type" : "value"
-            },
-            {
-                "name" : "Counter 1 - Multiplier",
-                "id" : "counter1Multiplier",
-                "reg_type" : "holding",
-                "address" : 1066,
-                "type" : "value"
-            },
 
-	        {
-	            "name" : "Zone 2 - Water Counter Mode",
-                "id" : "zone2Counter",
-                "reg_type" : "coil",
-                "address" : 11,
-                "group" : "g_general",
-                "type" : "switch"
-            },
-            {
-                "name" : "Counter 2 - Ticks",
-                "id" : "counter2Ticks",
-                "reg_type" : "input",
-                "address" : 1064,
-                "format" : "u32",
-                "type" : "value"
-            },
-            {
-                "name" : "Counter 2 - Multiplier",
-                "id" : "counter2Multiplier",
-                "reg_type" : "holding",
-                "address" : 1067,
-	        	"type" : "value"
-            },
-
-            {
-                "name" : "Zone 1 - Alarm",
-                "id" : "zone1Alarm",
-                "reg_type" : "discrete",
-                "address" : 1204,
-                "group": "water_sensors",
-                "type" : "switch"
-            },
             {
                 "name" : "Zone 1 - Line Break Control",
                 "id" : "zone1LineBreakControlEnabled",
                 "reg_type" : "discrete",
-                "address" : 1205,
-                "group": "water_sensors",
-                "type" : "switch"
-            },
-
-            {
-                "name" : "Zone 2 - Alarm",
-                "id" : "zone2Alarm",
-                "reg_type" : "discrete",
-                "address" : 1206,
-                "group": "water_sensors",
+                "address" : 1025,
+                "group": "g_general",
                 "type" : "switch"
             },
             {
                 "name" : "Zone 2 - Line Break Control",
                 "id" : "zone2LineBreakControlEnabled",
                 "reg_type" : "discrete",
-                "address" : 1207,
+                "address" : 1026,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 3 - Line Break Control",
+                "id" : "zone3LineBreakControlEnabled",
+                "reg_type" : "discrete",
+                "address" : 1027,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 4 - Line Break Control",
+                "id" : "zone4LineBreakControlEnabled",
+                "reg_type" : "discrete",
+                "address" : 1028,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 5 - Line Break Control",
+                "id" : "zone5LineBreakControlEnabled",
+                "reg_type" : "discrete",
+                "address" : 1029,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 6 - Line Break Control",
+                "id" : "zone6LineBreakControlEnabled",
+                "reg_type" : "discrete",
+                "address" : 1030,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 7 - Line Break Control",
+                "id" : "zone7LineBreakControlEnabled",
+                "reg_type" : "discrete",
+                "address" : 1031,
+                "group": "g_general",
+                "type" : "switch"
+            },
+
+            {
+                "name" : "Zone 1 - WSP+",
+                "id" : "zone1WSPPlus",
+                "reg_type" : "coil",
+                "address" : 1041,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 2 - WSP+",
+                "id" : "zone2WSPPlus",
+                "reg_type" : "coil",
+                "address" : 1042,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 3 - WSP+",
+                "id" : "zone3WSPPlus",
+                "reg_type" : "coil",
+                "address" : 1043,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 4 - WSP+",
+                "id" : "zone4WSPPlus",
+                "reg_type" : "coil",
+                "address" : 1044,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 5 - WSP+",
+                "id" : "zone5WSPPlus",
+                "reg_type" : "coil",
+                "address" : 1045,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 6 - WSP+",
+                "id" : "zone6WSPPlus",
+                "reg_type" : "coil",
+                "address" : 1046,
+                "group": "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 7 - WSP+",
+                "id" : "zone7WSPPlus",
+                "reg_type" : "coil",
+                "address" : 1047,
+                "group": "g_general",
+                "type" : "switch"
+            },
+
+            {
+                "name" : "Zone 1 - Water Counter Mode",
+                "id" : "zone1Counter",
+                "reg_type" : "coil",
+                "address" : 10,
                 "group": "water_sensors",
                 "type" : "switch"
             },
+            {
+                "name" : "Zone 2 - Water Counter Mode",
+                "id" : "zone2Counter",
+                "reg_type" : "coil",
+                "address" : 11,
+                "group": "water_sensors",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 3 - Water Counter Mode",
+                "id" : "zone3Counter",
+                "reg_type" : "coil",
+                "address" : 12,
+                "group": "water_sensors",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR Sensors - No response in last 24hrs",
+                "id" : "wsrSignalLost",
+                "reg_type" : "input",
+                "address" : 1208,
+                "group": "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR Sensors - No response in last 24hrs",
+                "id" : "wsrSignalLost",
+                "reg_type" : "input",
+                "address" : 1208,
+                "group": "water_sensors",
+                "type" : "value"
+            },
+
+
             {
                 "name" : "WSR Sensors - No response in last 24hrs",
                 "id" : "wsrSignalLost",
@@ -855,6 +939,10 @@
                 "Zone 2 - Water Counter Mode" : "Зона 2 - Режим счетчика",
                 "Counter 2 - Ticks" : "Счетчик 2 - тики",
                 "Counter 2 - Multiplier" : "Счетчик 2 - множитель",
+
+                "Zone 3 - Water Counter Mode" : "Зона 3 - Режим счетчика",
+                "Counter 3 - Ticks" : "Счетчик 3 - тики",
+                "Counter 3 - Multiplier" : "Счетчик 3 - множитель",
 
                 "Zone 1 - Alarm": "Зона 1 - Авария",
                 "Zone 1 - Line Break Control" : "Зона 1 - Контроль обрыва линии",
