@@ -164,7 +164,6 @@
                 "type" : "value"
             },
 
-
             {
                 "name" : "WSP 1 - Line Break",
                 "id" : "wsp1LineBreak",
@@ -280,7 +279,7 @@
             },
 
             {
-                "name" : "Zone 1 - Water Counter Mode",
+                "name" : "WSP 1 - Water Counter Mode",
                 "id" : "wsp1Counter",
                 "reg_type" : "coil",
                 "address" : 10,
@@ -288,7 +287,7 @@
                 "type" : "switch"
             },
             {
-                "name" : "Zone 2 - Water Counter Mode",
+                "name" : "WSP 2 - Water Counter Mode",
                 "id" : "wsp2Counter",
                 "reg_type" : "coil",
                 "address" : 11,
@@ -296,7 +295,7 @@
                 "type" : "switch"
             },
             {
-                "name" : "Zone 3 - Water Counter Mode",
+                "name" : "WSP 3 - Water Counter Mode",
                 "id" : "wsp3Counter",
                 "reg_type" : "coil",
                 "address" : 12,
@@ -1434,20 +1433,21 @@
                 "Valve Closed" : "Кран закрыт",
                 "Cleaning Mode" : "Режим уборки",
                 "Cleaning Mode Timer" : "Таймер режима уборки",
+                "Radio Relay Setting" : "Режим радиореле",
                 "Input FUN": "Вход управления FUN",
                 "Valve State" : "Состояние крана",
                 "valve_state_desc" : "0 - открыт; 1 - открывается; 2 - закрыт; 3 - закрывается; 4 - открыт при аварии; 5 - открывается во время аварии (по команде)",
                 "Time Until Autorotation, mins" : "Время до автопроворота, мин",
 
-                "Zone 1 - Water Counter Mode" : "Зона 1 - Режим счетчика",
+                "WSP 1 - Water Counter Mode" : "WSP 1 - Режим счетчика",
                 "Counter 1 - Ticks" : "Счетчик 1 - тики",
                 "Counter 1 - Multiplier" : "Счетчик 1 - множитель",
 
-                "Zone 2 - Water Counter Mode" : "Зона 2 - Режим счетчика",
+                "WSP 2 - Water Counter Mode" : "WSP 2 - Режим счетчика",
                 "Counter 2 - Ticks" : "Счетчик 2 - тики",
                 "Counter 2 - Multiplier" : "Счетчик 2 - множитель",
 
-                "Zone 3 - Water Counter Mode" : "Зона 3 - Режим счетчика",
+                "WSP 3 - Water Counter Mode" : "WSP 3 - Режим счетчика",
                 "Counter 3 - Ticks" : "Счетчик 3 - тики",
                 "Counter 3 - Multiplier" : "Счетчик 3 - множитель",
 
