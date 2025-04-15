@@ -166,56 +166,56 @@
 
 
             {
-                "name" : "Zone 1 - Line Break Control",
-                "id" : "zone1LineBreakControlEnabled",
+                "name" : "WSP 1 - Line Break",
+                "id" : "wsp1LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1025,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 2 - Line Break Control",
-                "id" : "zone2LineBreakControlEnabled",
+                "name" : "WSP 2 - Line Break",
+                "id" : "wsp2LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1026,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 3 - Line Break Control",
-                "id" : "zone3LineBreakControlEnabled",
+                "name" : "WSP 3 - Line Break",
+                "id" : "wsp3LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1027,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 4 - Line Break Control",
-                "id" : "zone4LineBreakControlEnabled",
+                "name" : "WSP 4 - Line Break",
+                "id" : "wsp4LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1028,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 5 - Line Break Control",
-                "id" : "zone5LineBreakControlEnabled",
+                "name" : "WSP 5 - Line Break",
+                "id" : "wsp5LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1029,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 6 - Line Break Control",
-                "id" : "zone6LineBreakControlEnabled",
+                "name" : "WSP 6 - Line Break",
+                "id" : "wsp6LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1030,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 7 - Line Break Control",
-                "id" : "zone7LineBreakControlEnabled",
+                "name" : "WSP 7 - Line Break Control",
+                "id" : "wsp7LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1031,
                 "group": "g_general",
@@ -223,56 +223,56 @@
             },
 
             {
-                "name" : "Zone 1 - WSP+",
-                "id" : "zone1WSPPlus",
+                "name" : "WSP 1 - WSP+ Mode",
+                "id" : "wsp1WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1041,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 2 - WSP+",
-                "id" : "zone2WSPPlus",
+                "name" : "WSP 2 - WSP+ Mode",
+                "id" : "wsp2WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1042,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 3 - WSP+",
-                "id" : "zone3WSPPlus",
+                "name" : "WSP 3 - WSP+ Mode",
+                "id" : "wsp3WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1043,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 4 - WSP+",
-                "id" : "zone4WSPPlus",
+                "name" : "WSP 4 - WSP+ Mode",
+                "id" : "wsp4WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1044,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 5 - WSP+",
-                "id" : "zone5WSPPlus",
+                "name" : "WSP 5 - WSP+ Mode",
+                "id" : "wsp5WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1045,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 6 - WSP+",
-                "id" : "zone6WSPPlus",
+                "name" : "WSP 6 - WSP+ Mode",
+                "id" : "wsp6WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1046,
                 "group": "g_general",
                 "type" : "switch"
             },
             {
-                "name" : "Zone 7 - WSP+",
-                "id" : "zone7WSPPlus",
+                "name" : "WSP 7 - WSP+ Mode",
+                "id" : "wsp7WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1047,
                 "group": "g_general",
@@ -281,7 +281,7 @@
 
             {
                 "name" : "Zone 1 - Water Counter Mode",
-                "id" : "zone1Counter",
+                "id" : "wsp1Counter",
                 "reg_type" : "coil",
                 "address" : 10,
                 "group": "water_sensors",
@@ -289,7 +289,7 @@
             },
             {
                 "name" : "Zone 2 - Water Counter Mode",
-                "id" : "zone2Counter",
+                "id" : "wsp2Counter",
                 "reg_type" : "coil",
                 "address" : 11,
                 "group": "water_sensors",
@@ -297,7 +297,7 @@
             },
             {
                 "name" : "Zone 3 - Water Counter Mode",
-                "id" : "zone3Counter",
+                "id" : "wsp3Counter",
                 "reg_type" : "coil",
                 "address" : 12,
                 "group": "water_sensors",
@@ -1451,16 +1451,34 @@
                 "Counter 3 - Ticks" : "Счетчик 3 - тики",
                 "Counter 3 - Multiplier" : "Счетчик 3 - множитель",
 
-                "Zone 1 - Alarm": "Зона 1 - Авария",
-                "Zone 1 - Line Break Control" : "Зона 1 - Контроль обрыва линии",
-
-                "Zone 2 - Alarm": "Зона 2 - Авария",
-                "Zone 2 - Line Break Control" : "Зона 2 - Контроль обрыва линии",
-
                 "WSR Sensors - Registered Total" : "WSR Датчики - Всего зарегистрировано",
                 "WSR Sensors - No response in last 24hrs" : "WSR Датчики - Не Зарегестрирован ответа в течение 24ч",
                 "WSR Sensors - Leak Detected" : "WSR Датчики - Обнаружена протечка",
                 "WSR Sensors - Low Charge" : "WSR Датчики - Низкий заряд баттареи",
+                
+                "WSP 1 - Line Break" : "WSP 1 - Обрыв линии",
+                "WSP 2 - Line Break" : "WSP 1 - Обрыв линии",
+                "WSP 3 - Line Break" : "WSP 1 - Обрыв линии",
+                "WSP 4 - Line Break" : "WSP 1 - Обрыв линии",
+                "WSP 5 - Line Break" : "WSP 1 - Обрыв линии",
+                "WSP 6 - Line Break" : "WSP 1 - Обрыв линии",
+                "WSP 7 - Line Break" : "WSP 1 - Обрыв линии",
+
+                "WSP 1 - WSP+ Mode" : "WSP 1 - Режим WSP+",
+                "WSP 2 - WSP+ Mode" : "WSP 2 - Режим WSP+",
+                "WSP 3 - WSP+ Mode" : "WSP 3 - Режим WSP+",
+                "WSP 4 - WSP+ Mode" : "WSP 4 - Режим WSP+",
+                "WSP 5 - WSP+ Mode" : "WSP 5 - Режим WSP+",
+                "WSP 6 - WSP+ Mode" : "WSP 6 - Режим WSP+",
+                "WSP 7 - WSP+ Mode" : "WSP 7 - Режим WSP+",
+
+                "WSP 1 - Alarm Flag" : "Проводной датчик 1 - Протечка",
+                "WSP 2 - Alarm Flag" : "Проводной датчик 2 - Протечка",
+                "WSP 3 - Alarm Flag" : "Проводной датчик 3 - Протечка",
+                "WSP 4 - Alarm Flag" : "Проводной датчик 4 - Протечка",
+                "WSP 5 - Alarm Flag" : "Проводной датчик 5 - Протечка",
+                "WSP 6 - Alarm Flag" : "Проводной датчик 6 - Протечка",
+                "WSP 7 - Alarm Flag" : "Проводной датчик 7 - Протечка",
 
                 "WSR 1 - Status":           "Радиодатчик 1 - Статус",
                 "WSR 1 - Signal Strength":  "Радиодатчик 1 - Сила сигнала",
