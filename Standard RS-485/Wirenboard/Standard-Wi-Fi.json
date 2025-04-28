@@ -205,23 +205,6 @@
             },
 
             {
-                "name" : "Zone 1 - Alarm",
-                "id" : "zone1Alarm",
-                "reg_type" : "discrete",
-                "address" : 1204,
-                "group": "water_sensors",
-                "type" : "switch"
-            },
-            {
-                "name" : "Zone 1 - Line Break Control",
-                "id" : "zone1LineBreakControlEnabled",
-                "reg_type" : "discrete",
-                "address" : 1205,
-                "group": "water_sensors",
-                "type" : "switch"
-            },
-
-            {
                 "name" : "Zone 2 - Alarm",
                 "id" : "zone2Alarm",
                 "reg_type" : "discrete",
@@ -651,6 +634,30 @@
                 "type" : "value"
             },
 
+            {
+				"name" : "WSP 1 - Alarm Flag",
+				"id" : "wsp1Alarm",
+				"reg_type" : "discrete",
+				"address" : 1343,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+            {
+				"name" : "WSP 2 - Alarm Flag",
+				"id" : "wsp2Alarm",
+				"reg_type" : "discrete",
+				"address" : 1344,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+            {
+				"name" : "External - Alarm Flag",
+				"id" : "externalAlarm",
+				"reg_type" : "discrete",
+				"address" : 1345,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
 
             {
 				"name" : "WSR 1 - Alarm Flag",
@@ -856,10 +863,10 @@
                 "Counter 2 - Ticks" : "Счетчик 2 - тики",
                 "Counter 2 - Multiplier" : "Счетчик 2 - множитель",
 
-                "Zone 1 - Alarm": "Зона 1 - Авария",
+                "WSP 1 - Alarm Flag": "Зона 1 - Авария",
                 "Zone 1 - Line Break Control" : "Зона 1 - Контроль обрыва линии",
 
-                "Zone 2 - Alarm": "Зона 2 - Авария",
+                "WSP 2 - Alarm Flag": "Зона 2 - Авария",
                 "Zone 2 - Line Break Control" : "Зона 2 - Контроль обрыва линии",
 
                 "WSR Sensors - Registered Total" : "WSR Датчики - Всего зарегистрировано",

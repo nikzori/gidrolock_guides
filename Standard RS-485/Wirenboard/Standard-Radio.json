@@ -1,0 +1,965 @@
+{
+    "device_type" : "GIDROLOCK_Standard_RS485",
+    "title": "GIDROLOCK_Standard_RS485",
+    "group": "g-custom",
+    "device" : {
+        "name": "GIDROLOCK Standard RS485",
+	"frame_timeout_ms" : 150,
+	"force_frame_timeout" : true,
+        "response_timeout_ms" : 255,
+        "guard_interval_us": 4000,
+        "groups": [
+            {
+                "title": "Water Sensors",
+                "id": "water_sensors",
+                "order": 1
+            },
+            {
+                "title": "Inputs",
+                "id": "inputs",
+                "order": 2
+            },
+            {
+                "title": "Outputs",
+                "id": "outputs",
+                "order": 3
+            },
+            {
+                "title": "General",
+                "id": "g_general",
+                "order": 4
+            }
+        ],
+
+        "parameters": {
+            "baud_rate": {
+                "title": "Baud rate",
+                "description": "baud_rate_description",
+                "address": 110,
+                "reg_type": "holding",
+                "enum": [6, 12, 24, 48, 96, 144, 192, 384, 576, 1152],
+                "default": 96,
+                "enum_titles": [
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "14400",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200"
+                ],
+                "group": "g_general",
+                "order": 1
+            },
+            "Response_delay_to_a_modbus_request_ms": {
+                "title": "Response delay to a modbus request (ms)",
+                "group": "g_general",
+                "address": 113,
+                "order": 2,
+                "reg_type": "holding",
+                "min": 0,
+                "max": 254,
+                "default": 0
+            },
+            "Modbus_Address": {
+                "title": "Device Modbus Address",
+                "group": "g_general",
+                "description": "Modbus_Address_description",
+                "address": 128,
+                "order": 3,
+                "reg_type": "holding",
+                "min": 0,
+                "max": 254
+            },
+            "Autorotation_set": {
+                "title": "autorotation_set_title",
+                "group": "g_general",
+                "address": 1212,
+                "order": 4,
+                "reg_type": "holding",
+                "min": 0,
+                "max": 65534,
+                "default": 20160
+            }
+        },
+
+        "channels": [
+            {
+                "name" : "Leak State",
+                "id" : "leak",
+                "reg_type" : "coil",
+                "address" : 1201,
+                "group": "water_sensors",
+                "type" : "switch"
+            },
+            {
+                "name" : "Valve Closed",
+                "id" : "valveClosed",
+                "reg_type" : "coil",
+                "address" : 1202,
+                "group": "outputs",
+                "type" : "switch"
+            },
+            {
+                "name" : "Cleaning Mode",
+                "id" : "cleaning",
+                "reg_type" : "coil",
+                "address" : 3,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Cleaning Mode Timer",
+                "id" : "cleaningTimer",
+                "reg_type" : "holding",
+                "address" : 975,
+                "group" : "g_general",
+                "type" : "value"
+            },
+            {
+                "name" : "Input FUN",
+                "id" : "FUN",
+                "reg_type" : "discrete",
+                "address" : 1203,
+                "group": "inputs",
+                "type" : "switch"
+            },
+            {
+                "name" : "Valve State",
+                "id" : "valveState",
+                "description" : "valve_state_desc",
+                "reg_type" : "holding",
+                "address" : 1213,
+                "group": "outputs",
+                "min": 0,
+                "max": 5,
+                "type" : "range"
+            },
+            {
+                "name" : "Current uptime",
+                "id" : "uptime",
+                "reg_type" : "input",
+                "address" : 104,
+                "format": "u32",
+                "group": "g_general",
+                "type" : "value"
+            },
+            {
+                "name" : "Time Until Autorotation, mins",
+                "id" : "autorotationTimer",
+                "reg_type" : "input",
+                "address" : 1211,
+                "group": "g_general",
+                "type" : "value"
+            },
+
+            {
+                "name" : "Zone 1 - Water Counter Mode",
+                "id" : "zone1Counter",
+                "reg_type" : "coil",
+                "address" : 10,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Counter 1 - Ticks",
+                "id" : "counter1Ticks",
+                "reg_type" : "input",
+                "address" : 1062,
+                "format" : "u32",
+                "type" : "value"
+            },
+            {
+                "name" : "Counter 1 - Multiplier",
+                "id" : "counter1Multiplier",
+                "reg_type" : "holding",
+                "address" : 1066,
+                "type" : "value"
+            },
+
+	        {
+	            "name" : "Zone 2 - Water Counter Mode",
+                "id" : "zone2Counter",
+                "reg_type" : "coil",
+                "address" : 11,
+                "group" : "g_general",
+                "type" : "switch"
+            },
+            {
+                "name" : "Counter 2 - Ticks",
+                "id" : "counter2Ticks",
+                "reg_type" : "input",
+                "address" : 1064,
+                "format" : "u32",
+                "type" : "value"
+            },
+            {
+                "name" : "Counter 2 - Multiplier",
+                "id" : "counter2Multiplier",
+                "reg_type" : "holding",
+                "address" : 1067,
+	        	"type" : "value"
+            },
+
+            {
+                "name" : "Zone 2 - Alarm",
+                "id" : "zone2Alarm",
+                "reg_type" : "discrete",
+                "address" : 1206,
+                "group": "water_sensors",
+                "type" : "switch"
+            },
+            {
+                "name" : "Zone 2 - Line Break Control",
+                "id" : "zone2LineBreakControlEnabled",
+                "reg_type" : "discrete",
+                "address" : 1207,
+                "group": "water_sensors",
+                "type" : "switch"
+            },
+            {
+                "name" : "WSR Sensors - No response in last 24hrs",
+                "id" : "wsrSignalLost",
+                "reg_type" : "input",
+                "address" : 1208,
+                "group": "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR Sensors - Leak Detected",
+                "id" : "wsrLeak",
+                "reg_type" : "input",
+                "address" : 1209,
+                "group": "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR Sensors - Low Charge",
+                "id" : "wsrLowCharge",
+                "reg_type" : "input",
+                "address" : 1210,
+                "group": "water_sensors",
+                "type" : "value"
+            },
+
+            {
+                "name" : "WSR Sensors - Registered Total",
+                "id" : "wsrTotal",
+                "reg_type" : "input",
+                "address" : 1214,
+                "group": "water_sensors",
+                "type" : "value"
+            },
+
+            {
+                "name" : "WSR 1 - Status",
+                "id" : "wsr1Status",
+                "reg_type" : "input",
+                "address" : 1215,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+            {
+                "name" : "WSR 2 - Status",
+                "id" : "wsr2Status",
+                "reg_type" : "input",
+                "address" : 1216,
+                "group": "water_sensors",
+                "type" : "value",
+		        "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+	        {
+                "name" : "WSR 3 - Status",
+                "id" : "wsr3Status",
+                "reg_type" : "input",
+                "address" : 1217,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+	    	{
+                "name" : "WSR 4 - Status",
+                "id" : "wsr4Status",
+                "reg_type" : "input",
+                "address" : 1218,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+	    	{
+                "name" : "WSR 5 - Status",
+                "id" : "wsr5Status",
+                "reg_type" : "input",
+                "address" : 1219,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+			{
+                "name" : "WSR 6 - Status",
+                "id" : "wsr6Status",
+                "reg_type" : "input",
+                "address" : 1220,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+	   		{
+                "name" : "WSR 7 - Status",
+                "id" : "wsr7Status",
+                "reg_type" : "input",
+                "address" : 1221,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+	    	{
+                "name" : "WSR 8 - Status",
+                "id" : "wsr8Status",
+                "reg_type" : "input",
+                "address" : 1222,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+			{
+                "name" : "WSR 9 - Status",
+                "id" : "wsr9Status",
+                "reg_type" : "input",
+                "address" : 1223,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+			{
+                "name" : "WSR 10 - Status",
+                "id" : "wsr10Status",
+                "reg_type" : "input",
+                "address" : 1224,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+			{
+                "name" : "WSR 11 - Status",
+                "id" : "wsr11Status",
+                "reg_type" : "input",
+                "address" : 1225,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+			{
+				"name" : "WSR 12 - Status",
+                "id" : "wsr12Status",
+                "reg_type" : "input",
+                "address" : 1226,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+			{
+				"name" : "WSR 13 - Status", 
+				"id" : "wsr13Status",
+				"reg_type" : "input",
+				"address" : 1227,
+				"group": "water_sensors",
+				"type" : "value",
+				"enum" : [0, 1, 2, 3, 4],
+				"enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+			},
+			{
+                "name" : "WSR 14 - Status",
+                "id" : "wsr14Status",
+                "reg_type" : "input",
+                "address" : 1228,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+			{
+                "name" : "WSR 15 - Status",
+                "id" : "wsr15Status",
+                "reg_type" : "input",
+                "address" : 1229,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+			{
+                "name" : "WSR 16 - Status",
+                "id" : "wsr16Status",
+                "reg_type" : "input",
+                "address" : 1230,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+			{
+                "name" : "WSR 17 - Status",
+                "id" : "wsr17Status",
+                "reg_type" : "input",
+                "address" : 1231,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+            {
+                "name" : "WSR 18 - Status",
+                "id" : "wsr18Status",
+                "reg_type" : "input",
+                "address" : 1232,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+            {
+                "name" : "WSR 19 - Status",
+                "id" : "wsr19Status",
+                "reg_type" : "input",
+                "address" : 1233,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+            {
+                "name" : "WSR 20 - Status",
+                "id" : "wsr20Status",
+                "reg_type" : "input",
+                "address" : 1234,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+            {
+                "name" : "WSR 21 - Status",
+                "id" : "wsr21Status",
+                "reg_type" : "input",
+                "address" : 1235,
+                "group": "water_sensors",
+                "type" : "value",
+                "enum" : [0, 1, 2, 3, 4],
+                "enum_titles" : ["Не Зарегестрирован", "Норма", "Протечка", "Низкий Заряд", "Потеря Связи"]
+            },
+            
+            {
+                "name" : "WSR 1 - Signal Strength",
+                "id" : "wsr1Signal",
+                "reg_type" : "input",
+                "address" : 1247,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 2 - Signal Strength",
+                "id" : "wsr2Signal",
+                "reg_type" : "input",
+                "address" : 1248,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 3 - Signal Strength",
+                "id" : "wsr3Signal",
+                "reg_type" : "input",
+                "address" : 1249,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 4 - Signal Strength",
+                "id" : "wsr4Signal",
+                "reg_type" : "input",
+                "address" : 1250,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 5 - Signal Strength",
+                "id" : "wsr5Signal",
+                "reg_type" : "input",
+                "address" : 1251,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 6 - Signal Strength",
+                "id" : "wsr6Signal",
+                "reg_type" : "input",
+                "address" : 1252,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 7 - Signal Strength",
+                "id" : "wsr7Signal",
+                "reg_type" : "input",
+                "address" : 1253,
+                "group" : "water_sensors",
+                "type" : "value"
+            },	
+            {
+                "name" : "WSR 8 - Signal Strength",
+                "id" : "wsr8Signal",
+                "reg_type" : "input",
+                "address" : 1254,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 9 - Signal Strength",
+                "id" : "wsr9Signal",
+                "reg_type" : "input",
+                "address" : 1255,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 10 - Signal Strength",
+                "id" : "wsr10Signal",
+                "reg_type" : "input",
+                "address" : 1256,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 11 - Signal Strength",
+                "id" : "wsr11Signal",
+                "reg_type" : "input",
+                "address" : 1257,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 12 - Signal Strength",
+                "id" : "wsr12Signal",
+                "reg_type" : "input",
+                "address" : 1258,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 13 - Signal Strength",
+                "id" : "wsr13Signal",
+                "reg_type" : "input",
+                "address" : 1259,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 14 - Signal Strength",
+                "id" : "wsr14Signal",
+                "reg_type" : "input",
+                "address" : 1260,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 15 - Signal Strength",
+                "id" : "wsr15Signal",
+                "reg_type" : "input",
+                "address" : 1261,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 16 - Signal Strength",
+                "id" : "wsr16Signal",
+                "reg_type" : "input",
+                "address" : 1262,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 17 - Signal Strength",
+                "id" : "wsr17Signal",
+                "reg_type" : "input",
+                "address" : 1263,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 18 - Signal Strength",
+                "id" : "wsr18Signal",
+                "reg_type" : "input",
+                "address" : 1264,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 19 - Signal Strength",
+                "id" : "wsr19Signal",
+                "reg_type" : "input",
+                "address" : 1265,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 20 - Signal Strength",
+                "id" : "wsr20Signal",
+                "reg_type" : "input",
+                "address" : 1266,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+            {
+                "name" : "WSR 21 - Signal Strength",
+                "id" : "wsr21Signal",
+                "reg_type" : "input",
+                "address" : 1267,
+                "group" : "water_sensors",
+                "type" : "value"
+            },
+
+            {
+				"name" : "WSP 1 - Alarm Flag",
+				"id" : "wsp1Alarm",
+				"reg_type" : "discrete",
+				"address" : 1343,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+            {
+				"name" : "WSP 2 - Alarm Flag",
+				"id" : "wsp2Alarm",
+				"reg_type" : "discrete",
+				"address" : 1344,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+            
+
+            {
+				"name" : "WSR 1 - Alarm Flag",
+				"id" : "wsr1Alarm",
+				"reg_type" : "discrete",
+				"address" : 1345,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 2 - Alarm Flag",
+				"id" : "wsr2Alarm",
+				"reg_type" : "discrete",
+				"address" : 1346,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 3 - Alarm Flag",
+				"id" : "wsr3Alarm",
+				"reg_type" : "discrete",
+				"address" : 1347,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 4 - Alarm Flag",
+				"id" : "wsr4Alarm",
+				"reg_type" : "discrete",
+				"address" : 1348,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 5 - Alarm Flag",
+				"id" : "wsr5Alarm",
+				"reg_type" : "discrete",
+				"address" : 1349,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 6 - Alarm Flag",
+				"id" : "wsr6Alarm",
+				"reg_type" : "discrete",
+				"address" : 1350,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 7 - Alarm Flag",
+				"id" : "wsr7Alarm",
+				"reg_type" : "discrete",
+				"address" : 1351,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 8 - Alarm Flag",
+				"id" : "wsr8Alarm",
+				"reg_type" : "discrete",
+				"address" : 1352,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 9 - Alarm Flag",
+				"id" : "wsr9Alarm",
+				"reg_type" : "discrete",
+				"address" : 1353,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 10 - Alarm Flag",
+				"id" : "wsr10Alarm",
+				"reg_type" : "discrete",
+				"address" : 1354,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 11 - Alarm Flag",
+				"id" : "wsr11Alarm",
+				"reg_type" : "discrete",
+				"address" : 1355,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 12 - Alarm Flag",
+				"id" : "wsr12Alarm",
+				"reg_type" : "discrete",
+				"address" : 1356,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 13 - Alarm Flag",
+				"id" : "wsr13Alarm",
+				"reg_type" : "discrete",
+				"address" : 1357,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 14 - Alarm Flag",
+				"id" : "wsr14Alarm",
+				"reg_type" : "discrete",
+				"address" : 1358,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 15 - Alarm Flag",
+				"id" : "wsr15Alarm",
+				"reg_type" : "discrete",
+				"address" : 1359,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 16 - Alarm Flag",
+				"id" : "wsr16Alarm",
+				"reg_type" : "discrete",
+				"address" : 1360,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 17 - Alarm Flag",
+				"id" : "wsr17Alarm",
+				"reg_type" : "discrete",
+				"address" : 1361,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 18 - Alarm Flag",
+				"id" : "wsr18Alarm",
+				"reg_type" : "discrete",
+				"address" : 1362,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 19 - Alarm Flag",
+				"id" : "wsr19Alarm",
+				"reg_type" : "discrete",
+				"address" : 1363,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 20 - Alarm Flag",
+				"id" : "wsr20Alarm",
+				"reg_type" : "discrete",
+				"address" : 1364,
+				"group" : "water_sensors",
+				"type" : "switch"
+			},
+			{
+				"name" : "WSR 21 - Alarm Flag",
+				"id" : "wsr21Alarm",
+				"reg_type" : "discrete",
+				"address" : 1365,
+				"group" : "water_sensors",
+				"type" : "switch"
+			}
+        ],
+        "translations": {
+            "en": {
+                "Modbus_Address_description": "Before changing make sure that the connection to the device is established. Select the address, save and set the same address in the settings.",
+                "baud_rate_description": "Before changing make sure that the connection to the device is established. Select the rate, save and set the same rate in the settings.",
+                "GIDROLOCK_Standard_RS485": "Leak protection system Gidrolock Standard RS485",
+
+                "autorotation_set_title" : "Set autorotation period"
+            },
+            "ru": {
+                "GIDROLOCK_Standard_RS485": "Система защиты от протечки Гидролок Standard RS485",
+                "Water sensors": "Датчики протечки",
+                "Inputs": "Входы",
+                "HW Info": "Данные модуля",
+                "Outputs": "Выходы",
+                "General": "Общие",
+
+                "autorotation_set_title" : "Указать период автопроворота",
+
+                "Leak State" : "Статус протечки",
+                "Valve Closed" : "Кран закрыт",
+                "Cleaning Mode" : "Режим уборки",
+                "Cleaning Mode Timer" : "Таймер режима уборки",
+                "Input FUN": "Вход управления FUN",
+                "Valve State" : "Состояние крана",
+                "valve_state_desc" : "0 - открыт; 1 - открывается; 2 - закрыт; 3 - закрывается; 4 - открыт при аварии; 5 - открывается во время аварии (по команде)",
+                "Time Until Autorotation, mins" : "Время до автопроворота, мин",
+
+                "Zone 1 - Water Counter Mode" : "Зона 1 - Режим счетчика",
+                "Counter 1 - Ticks" : "Счетчик 1 - тики",
+                "Counter 1 - Multiplier" : "Счетчик 1 - множитель",
+
+                "Zone 2 - Water Counter Mode" : "Зона 2 - Режим счетчика",
+                "Counter 2 - Ticks" : "Счетчик 2 - тики",
+                "Counter 2 - Multiplier" : "Счетчик 2 - множитель",
+
+                "WSP 1 - Alarm Flag": "Зона 1 - Авария",
+                "Zone 1 - Line Break Control" : "Зона 1 - Контроль обрыва линии",
+
+                "WSP 2 - Alarm Flag": "Зона 2 - Авария",
+                "Zone 2 - Line Break Control" : "Зона 2 - Контроль обрыва линии",
+
+                "WSR Sensors - Registered Total" : "WSR Датчики - Всего зарегистрировано",
+                "WSR Sensors - No response in last 24hrs" : "WSR Датчики - Не Зарегестрирован ответа в течение 24ч",
+                "WSR Sensors - Leak Detected" : "WSR Датчики - Обнаружена протечка",
+                "WSR Sensors - Low Charge" : "WSR Датчики - Низкий заряд баттареи",
+
+                "WSR 1 - Status":           "Радиодатчик 1 - Статус",
+                "WSR 1 - Signal Strength":  "Радиодатчик 1 - Сила сигнала",
+                "WSR 1 - Alarm Flag" :      "Радиодатчик 1 - Протечка",
+
+                "WSR 2 - Status":           "Радиодатчик 2 - Статус",
+                "WSR 2 - Signal Strength":  "Радиодатчик 2 - Сила сигнала",
+                "WSR 2 - Alarm Flag" :      "Радиодатчик 2 - Протечка",
+
+                "WSR 3 - Status":           "Радиодатчик 3 - Статус",
+                "WSR 3 - Signal Strength":  "Радиодатчик 3 - Сила сигнала",
+                "WSR 3 - Alarm Flag" :      "Радиодатчик 3 - Протечка",
+
+                "WSR 4 - Status":           "Радиодатчик 4 - Статус",
+                "WSR 4 - Signal Strength":  "Радиодатчик 4 - Сила сигнала",
+                "WSR 4 - Alarm Flag" :      "Радиодатчик 4 - Протечка",
+
+                "WSR 5 - Status":           "Радиодатчик 5 - Статус",
+                "WSR 5 - Signal Strength":  "Радиодатчик 5 - Сила сигнала",
+                "WSR 5 - Alarm Flag" :      "Радиодатчик 5 - Протечка",
+
+                "WSR 6 - Status":           "Радиодатчик 6 - Статус",
+                "WSR 6 - Signal Strength":  "Радиодатчик 6 - Сила сигнала",
+                "WSR 6 - Alarm Flag" :      "Радиодатчик 6 - Протечка",
+
+                "WSR 7 - Status":           "Радиодатчик 7 - Статус",
+                "WSR 7 - Signal Strength":  "Радиодатчик 7 - Сила сигнала",
+                "WSR 7 - Alarm Flag" :      "Радиодатчик 7 - Протечка",
+
+                "WSR 8 - Status":           "Радиодатчик 8 - Статус",
+                "WSR 8 - Signal Strength":  "Радиодатчик 8 - Сила сигнала",
+                "WSR 8 - Alarm Flag" :      "Радиодатчик 8 - Протечка",
+
+                "WSR 9 - Status":           "Радиодатчик 9 - Статус",
+                "WSR 9 - Signal Strength":  "Радиодатчик 9 - Сила сигнала",
+                "WSR 9 - Alarm Flag" :      "Радиодатчик 9 - Протечка",
+
+                "WSR 10 - Status":          "Радиодатчик 10 - Статус",
+                "WSR 10 - Signal Strength": "Радиодатчик 10 - Сила сигнала",
+                "WSR 10 - Alarm Flag" :     "Радиодатчик 10 - Протечка",
+
+                "WSR 11 - Status":          "Радиодатчик 11 - Статус",
+                "WSR 11 - Signal Strength": "Радиодатчик 11 - Сила сигнала",
+                "WSR 11 - Alarm Flag" :     "Радиодатчик 11 - Протечка",
+
+                "WSR 12 - Status":          "Радиодатчик 12 - Статус",
+                "WSR 12 - Signal Strength": "Радиодатчик 12 - Сила сигнала",
+                "WSR 12 - Alarm Flag" :     "Радиодатчик 12 - Протечка",
+
+                "WSR 13 - Status":          "Радиодатчик 13 - Статус",
+                "WSR 13 - Signal Strength": "Радиодатчик 13 - Сила сигнала",
+                "WSR 13 - Alarm Flag" :     "Радиодатчик 13 - Протечка",
+
+                "WSR 14 - Status":          "Радиодатчик 14 - Статус",
+                "WSR 14 - Signal Strength": "Радиодатчик 14 - Сила сигнала",
+                "WSR 14 - Alarm Flag" :     "Радиодатчик 14 - Протечка",
+
+                "WSR 15 - Status":          "Радиодатчик 15 - Статус",
+                "WSR 15 - Signal Strength": "Радиодатчик 15 - Сила сигнала",
+                "WSR 15 - Alarm Flag" :     "Радиодатчик 15 - Протечка",
+
+                "WSR 16 - Status":          "Радиодатчик 16 - Статус",
+                "WSR 16 - Signal Strength": "Радиодатчик 16 - Сила сигнала",
+                "WSR 16 - Alarm Flag" :     "Радиодатчик 16 - Протечка",
+
+                "WSR 17 - Status":          "Радиодатчик 17 - Статус",
+                "WSR 17 - Signal Strength": "Радиодатчик 17 - Сила сигнала",
+                "WSR 17 - Alarm Flag" :     "Радиодатчик 17 - Протечка",
+
+                "WSR 18 - Status":          "Радиодатчик 18 - Статус",
+                "WSR 18 - Signal Strength": "Радиодатчик 18 - Сила сигнала",
+                "WSR 18 - Alarm Flag" :      "Радиодатчик 18 - Протечка",
+
+                "WSR 19 - Status":          "Радиодатчик 19 - Статус",
+                "WSR 19 - Signal Strength": "Радиодатчик 19 - Сила сигнала",
+                "WSR 19 - Alarm Flag" :      "Радиодатчик 19 - Протечка",
+
+                "WSR 20 - Status":          "Радиодатчик 20 - Статус",
+                "WSR 20 - Signal Strength": "Радиодатчик 20 - Сила сигнала",
+                "WSR 20 - Alarm Flag" :     "Радиодатчик 20 - Протечка",
+                
+                "WSR 21 - Status":          "Радиодатчик 21 - Статус",
+                "WSR 21 - Signal Strength": "Радиодатчик 21 - Сила сигнала",
+                "WSR 21 - Alarm Flag" :     "Радиодатчик 21 - Протечка",
+                
+                
+                "Baud rate": "Скорость обмена",
+                "baud_rate_description": "Перед изменением параметра убедитесь, что связь с устройством установлена. Выберите нужную скорость обмена, сохраните конфигурацию, а затем укажите в настройках порта эту же скорость.",
+                "Time before sending a response to a modbus request (ms)": "Время перед отправкой ответа на modbus запрос (мс)",
+                "Device Modbus Address": "Modbus Адрес устройтсва",
+                "Modbus_Address_description": "Перед изменением параметра убедитесь, что связь с устройством установлена. Выберите нужный адрес, сохраните конфигурацию, а затем укажите в настройках устройства этот же адрес.",
+                "Current uptime": "Время работы",
+                "FW Version": "Версия прошивки"
+            }
+        }
+    }
+}
