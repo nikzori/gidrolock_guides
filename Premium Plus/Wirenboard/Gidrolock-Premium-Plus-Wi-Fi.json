@@ -169,7 +169,7 @@
                 "id" : "wsp1LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1025,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
@@ -177,7 +177,7 @@
                 "id" : "wsp2LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1026,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
@@ -185,7 +185,7 @@
                 "id" : "wsp3LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1027,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
@@ -193,7 +193,7 @@
                 "id" : "wsp4LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1028,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
@@ -201,7 +201,7 @@
                 "id" : "wsp5LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1029,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
@@ -209,7 +209,7 @@
                 "id" : "wsp6LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1030,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
@@ -217,64 +217,64 @@
                 "id" : "wsp7LineBreak",
                 "reg_type" : "discrete",
                 "address" : 1031,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
 
             {
-                "name" : "WSP 1 - WSP+ Mode",
+                "name" : "WSP 1 - WSP Plus Mode",
                 "id" : "wsp1WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1041,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
-                "name" : "WSP 2 - WSP+ Mode",
+                "name" : "WSP 2 - WSP Plus Mode",
                 "id" : "wsp2WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1042,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
-                "name" : "WSP 3 - WSP+ Mode",
+                "name" : "WSP 3 - WSP Plus Mode",
                 "id" : "wsp3WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1043,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
-                "name" : "WSP 4 - WSP+ Mode",
+                "name" : "WSP 4 - WSP Plus Mode",
                 "id" : "wsp4WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1044,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
-                "name" : "WSP 5 - WSP+ Mode",
+                "name" : "WSP 5 - WSP Plus Mode",
                 "id" : "wsp5WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1045,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
-                "name" : "WSP 6 - WSP+ Mode",
+                "name" : "WSP 6 - WSP Plus Mode",
                 "id" : "wsp6WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1046,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
             {
-                "name" : "WSP 7 - WSP+ Mode",
+                "name" : "WSP 7 - WSP Plus Mode",
                 "id" : "wsp7WSPPlus",
                 "reg_type" : "coil",
                 "address" : 1047,
-                "group": "g_general",
+                "group": "water_sensors",
                 "type" : "switch"
             },
 
@@ -320,24 +320,7 @@
                 "group": "water_sensors",
                 "type" : "value"
             },
-            {
-                "name" : "WSR Sensors - No response in last 24hrs",
-                "id" : "wsrSignalLost",
-                "reg_type" : "input",
-                "address" : 1208,
-                "group": "water_sensors",
-                "type" : "value"
-            },
-
-
-            {
-                "name" : "WSR Sensors - No response in last 24hrs",
-                "id" : "wsrSignalLost",
-                "reg_type" : "input",
-                "address" : 1208,
-                "group": "water_sensors",
-                "type" : "value"
-            },
+            
             {
                 "name" : "WSR Sensors - Leak Detected",
                 "id" : "wsrLeak",
@@ -798,7 +781,7 @@
             },
             {
                 "name" : "WSR 21 - High Security Mode",
-                "id" : "wsr21Ignore",
+                "id" : "wsr21Security",
                 "reg_type" : "coil",
                 "address" : 827,
                 "group" : "g_general",
@@ -1204,7 +1187,7 @@
 			},
 			{
 				"name" : "WSP 3 - Alarm Flag",
-				"id" : "wsr3Alarm",
+				"id" : "wsp3Alarm",
 				"reg_type" : "discrete",
 				"address" : 1346,
 				"group" : "water_sensors",
@@ -1212,7 +1195,7 @@
 			},
 			{
 				"name" : "WSP 4 - Alarm Flag",
-				"id" : "wsr4Alarm",
+				"id" : "wsp4Alarm",
 				"reg_type" : "discrete",
 				"address" : 1347,
 				"group" : "water_sensors",
@@ -1220,7 +1203,7 @@
 			},
 			{
 				"name" : "WSP 5 - Alarm Flag",
-				"id" : "wsr5Alarm",
+				"id" : "wsp5Alarm",
 				"reg_type" : "discrete",
 				"address" : 1348,
 				"group" : "water_sensors",
@@ -1228,7 +1211,7 @@
 			},
 			{
 				"name" : "WSP 6 - Alarm Flag",
-				"id" : "wsr6Alarm",
+				"id" : "wsp6Alarm",
 				"reg_type" : "discrete",
 				"address" : 1349,
 				"group" : "water_sensors",
@@ -1236,7 +1219,7 @@
 			},
 			{
 				"name" : "WSP 7 - Alarm Flag",
-				"id" : "wsr7Alarm",
+				"id" : "wsp7Alarm",
 				"reg_type" : "discrete",
 				"address" : 1350,
 				"group" : "water_sensors",
@@ -1420,7 +1403,7 @@
                 "autorotation_set_title" : "Set autorotation period"
             },
             "ru": {
-                "GIDROLOCK_Standard_RS485": "Система защиты от протечки Гидролок Standard RS485",
+                "GIDROLOCK_Premium_Plus": "Система защиты от протечки Gidrolock Premium Plus Wi-Fi",
                 "Water sensors": "Датчики протечки",
                 "Inputs": "Входы",
                 "HW Info": "Данные модуля",
@@ -1464,13 +1447,13 @@
                 "WSP 6 - Line Break" : "WSP 1 - Обрыв линии",
                 "WSP 7 - Line Break" : "WSP 1 - Обрыв линии",
 
-                "WSP 1 - WSP+ Mode" : "WSP 1 - Режим WSP+",
-                "WSP 2 - WSP+ Mode" : "WSP 2 - Режим WSP+",
-                "WSP 3 - WSP+ Mode" : "WSP 3 - Режим WSP+",
-                "WSP 4 - WSP+ Mode" : "WSP 4 - Режим WSP+",
-                "WSP 5 - WSP+ Mode" : "WSP 5 - Режим WSP+",
-                "WSP 6 - WSP+ Mode" : "WSP 6 - Режим WSP+",
-                "WSP 7 - WSP+ Mode" : "WSP 7 - Режим WSP+",
+                "WSP 1 - WSP Plus Mode" : "WSP 1 - Режим WSP Plus",
+                "WSP 2 - WSP Plus Mode" : "WSP 2 - Режим WSP Plus",
+                "WSP 3 - WSP Plus Mode" : "WSP 3 - Режим WSP Plus",
+                "WSP 4 - WSP Plus Mode" : "WSP 4 - Режим WSP Plus",
+                "WSP 5 - WSP Plus Mode" : "WSP 5 - Режим WSP Plus",
+                "WSP 6 - WSP Plus Mode" : "WSP 6 - Режим WSP Plus",
+                "WSP 7 - WSP Plus Mode" : "WSP 7 - Режим WSP Plus",
 
                 "WSP 1 - Alarm Flag" : "Проводной датчик 1 - Протечка",
                 "WSP 2 - Alarm Flag" : "Проводной датчик 2 - Протечка",
