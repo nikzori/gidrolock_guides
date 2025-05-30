@@ -1,9 +1,9 @@
 {
-    "device_type" : "GIDROLOCK_Standard_RS485",
-    "title": "GIDROLOCK_Standard_RS485",
+    "device_type" : "GIDROLOCK_Premium_Plus",
+    "title": "GIDROLOCK_Premium_Plus",
     "group": "g-custom",
     "device" : {
-        "name": "GIDROLOCK Standard RS485",
+        "name": "GIDROLOCK Premium Plus Wi-Fi",
 	"frame_timeout_ms" : 150,
 	"force_frame_timeout" : true,
         "response_timeout_ms" : 255,
