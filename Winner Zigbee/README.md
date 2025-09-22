@@ -3,11 +3,7 @@ RU | [EN](README_en.md)
 # ZigBee2MQTT: файлы конфигурации
 ## Версия для Tuya 
 Файлы расширения для ZigBee2MQTT; для поддержки устройства необходим только один из файлов. 
-Поместите файл в папку `/data`. В файле `configuration.yaml` в той же папке добавьте следущее:
-```
-external_converters:
-  - win.basic.js
-```
+Поместите файл в папку `/data/external_converters`. 
 
 ## `win.basic.js`
 Базовая поддержка для Winner'а. Доступные данные:
